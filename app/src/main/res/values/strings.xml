@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">User Account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="email">Email</string>
+    <string name="password">password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forget">Forget</string>
+    <string name="password_with_q_mark">password?</string>
+    <string name="you_don_t_have_an">You don\'t have an</string>
+    <string name="account">Account?</string>
+    <string name="ahjzli">Ahjzli</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="user_name">User name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="do_you_have_an">Do you have an</string>
+    <string name="enter_registered_email_to_reset_your_password">Enter registered email to reset your password</string>
+    <string name="forget_password">Forget password!!</string>
+    <string name="search">search</string>
+    <string name="restaurant_name">Restaurant name</string>
+    <string name="branch_name">Branch name</string>
+</resources>

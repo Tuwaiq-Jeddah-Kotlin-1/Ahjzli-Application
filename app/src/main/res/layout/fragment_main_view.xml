@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_img"
+    tools:context=".MainView">
+
+    <FrameLayout
+        android:id="@+id/frameLayoutInMainView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineInMainView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/gif_logo_main"
+            android:layout_width="100dp"
+            android:layout_height="85dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/my_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ahjzli"
+            android:textColor="@color/green"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:layout_gravity="center|top"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"/>
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/search_view_background"
+            android:iconifiedByDefault="false"
+            android:queryHint="restaurants..."
+            android:textColor="@color/black" />
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineInMainView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/restaurantsRV"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineInMainView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
