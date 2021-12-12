@@ -1,4 +1,4 @@
-package com.tuwaiq.useraccount
+package com.tuwaiq.useraccount.registration
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import com.tuwaiq.useraccount.R
 
 
 class Register : Fragment() {

@@ -26,7 +26,6 @@ class Splash : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         logoGif =view.findViewById(R.id.gif_logo)
         logoTextView = view.findViewById(R.id.txt_logo)
 

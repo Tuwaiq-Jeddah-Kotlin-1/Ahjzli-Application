@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background_img"
-    tools:context=".MainView">
+    tools:context=".MainInterface">
 
     <FrameLayout
         android:id="@+id/frameLayoutInMainView"
@@ -16,6 +16,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
         <pl.droidsonroids.gif.GifImageView
             android:layout_width="100dp"
@@ -33,13 +37,13 @@
             android:layout_gravity="center|top"
             android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"/>
+        </LinearLayout>
 
         <SearchView
             android:id="@+id/searchView"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|bottom"
-            android:layout_marginTop="15dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/search_view_background"
             android:iconifiedByDefault="false"

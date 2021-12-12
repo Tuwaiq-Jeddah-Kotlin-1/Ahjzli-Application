@@ -4,7 +4,7 @@
     <PreferenceCategory
         android:title="General">
         <SwitchPreference
-            android:key="them_preference"
+            android:key="theme_preference"
             android:defaultValue="false"
             android:title="Dark Theme" />
         <ListPreference
