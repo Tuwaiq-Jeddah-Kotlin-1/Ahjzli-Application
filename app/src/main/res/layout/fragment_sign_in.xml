@@ -128,6 +128,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
+                android:textColor="@color/black"
                 android:layout_marginTop="17dp"
                 android:text="@string/forget"/>
 
@@ -160,6 +161,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="@string/you_don_t_have_an"
                 android:layout_gravity="center"/>
             <TextView

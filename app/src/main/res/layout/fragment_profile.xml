@@ -46,7 +46,7 @@
                 android:textSize="50sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
+<!--            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -54,6 +54,7 @@
                 android:textColorHint="@color/green"
                 app:startIconDrawable="@drawable/ic_person"
                 app:startIconTint="@color/green">
+
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tiet_userName_profile"
@@ -64,10 +65,20 @@
                     android:inputType="textPersonName"
                     android:textColor="@color/green"
                     android:textSize="25sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>-->
+            <TextView
+                android:id="@+id/tiet_userName_profile"
+                android:layout_width="301dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:hint="@string/user_name"
+                android:textColor="@color/green"
+                android:textSize="25sp" />
 
 
-            <com.google.android.material.textfield.TextInputLayout
+<!--            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -85,9 +96,19 @@
                     android:inputType="textEmailAddress"
                     android:textColor="@color/green"
                     android:textSize="25sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_email_Profile"
+                android:layout_width="301dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:hint="@string/email"
+                android:textColor="@color/green"
+                android:textSize="25sp" />
+            <!--<com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -104,7 +125,17 @@
                     android:inputType="phone"
                     android:textColor="@color/green"
                     android:textSize="25sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>-->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_Phone_profile"
+                android:layout_width="301dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                android:hint="@string/phone_number"
+                android:textColor="@color/green"
+                android:layout_marginTop="15dp"
+                android:textSize="25sp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
