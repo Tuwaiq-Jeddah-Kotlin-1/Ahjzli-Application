@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_sign_in" >
         <action
             android:id="@+id/action_signIn_to_register"
-            app:destination="@id/Register" />
+            app:destination="@id/Register"
+            app:popUpTo="@id/signIn"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_signIn_to_forgetPassword"
             app:destination="@id/forgetPassword"
@@ -71,7 +73,13 @@
         android:id="@+id/profile"
         android:name="com.tuwaiq.useraccount.Profile"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_to_signIn"
+            app:destination="@id/signIn"
+            app:popUpTo="@id/profile"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/settings"
         android:name="com.tuwaiq.useraccount.Settings"

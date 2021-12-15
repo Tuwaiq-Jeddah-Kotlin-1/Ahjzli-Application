@@ -16,6 +16,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.tuwaiq.useraccount.R
 
 
@@ -70,19 +71,15 @@ class SignIn : Fragment() {
     private fun signIn() {
         val email: String = enterYourEmail.text.toString().trim { it <= ' ' }
         val password =enterYourPass.text.toString().trim { it <= ' ' }
-
         if(email.isNotEmpty() && password.isNotEmpty()) {
+
             //get the email and pass from the Authentication
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(context, "Sign in successful", Toast.LENGTH_LONG)
-                            .show()
 
-                        val action: NavDirections = SignInDirections.actionSignInToMainView()
-                        view?.findNavController()?.navigate(action)
+                        checkInTheFireStore()
 
-                        checkBox()
                     } else {
                         // if the registration is not successful then show error massage
                         Toast.makeText(
@@ -96,6 +93,29 @@ class SignIn : Fragment() {
                 .show()
         }
     }
+
+    //check in the fireStore
+    private fun checkInTheFireStore(){
+        val uId =FirebaseAuth.getInstance().currentUser?.uid
+        val db = FirebaseFirestore.getInstance()
+        db.collection("UserAccount").document("$uId")
+            .get().addOnCompleteListener {
+                if (it.result?.exists()!!){
+                    Toast.makeText(context, "Sign in successful", Toast.LENGTH_LONG)
+                        .show()
+
+                    val action: NavDirections =
+                        SignInDirections.actionSignInToMainView()
+                    view?.findNavController()?.navigate(action)
+
+                    checkBox()
+                }else{
+                    Toast.makeText(context, "Please make sure the values are correct", Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+    }
+
 
     fun checkBox(){
 

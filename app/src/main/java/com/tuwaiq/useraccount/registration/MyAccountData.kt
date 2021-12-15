@@ -1,4 +1,4 @@
-package com.tuwaiq.useraccount
+package com.tuwaiq.useraccount.registration
 
 data class MyAccountData(
     val userName:String,
