@@ -77,15 +77,11 @@ class SignIn : Fragment() {
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-
                         checkInTheFireStore()
-
                     } else {
                         // if the registration is not successful then show error massage
-                        Toast.makeText(
-                            context, "Please make sure the values are correct, or fill the fields",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(context, "Please make sure the values are correct, or fill the fields",
+                            Toast.LENGTH_LONG).show()
                     }
                 }
         }else{
@@ -104,8 +100,7 @@ class SignIn : Fragment() {
                     Toast.makeText(context, "Sign in successful", Toast.LENGTH_LONG)
                         .show()
 
-                    val action: NavDirections =
-                        SignInDirections.actionSignInToMainView()
+                    val action: NavDirections = SignInDirections.actionSignInToMainView()
                     view?.findNavController()?.navigate(action)
 
                     checkBox()
@@ -117,7 +112,7 @@ class SignIn : Fragment() {
     }
 
 
-    fun checkBox(){
+    private fun checkBox(){
 
         val emailPreference: String = enterYourEmail.text.toString()
         val passwordPreference: String = enterYourPass.text.toString()

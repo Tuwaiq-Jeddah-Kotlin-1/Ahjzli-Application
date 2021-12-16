@@ -62,10 +62,9 @@ class Profile : Fragment() {
 
         val uId =FirebaseAuth.getInstance().currentUser?.uid
         try {
-            //coroutine
             val db = FirebaseFirestore.getInstance()
             db.collection("UserAccount").document("$uId")
-                .get().addOnCompleteListener { it
+                .get().addOnCompleteListener {
 
                     if (it.result?.exists()!!) {
                         //+++++++++++++++++++++++++++++++++++++++++
@@ -105,8 +104,8 @@ class Profile : Fragment() {
     }
     private fun getSharedPreferences(){
         val editor:SharedPreferences.Editor = sharedPreferences.edit()
-        val getEmail = sharedPreferences.getString("EMAIL","")
-        val getPass = sharedPreferences.getString("PASSWORD","")
+        sharedPreferences.getString("EMAIL","")
+        sharedPreferences.getString("PASSWORD","")
         editor.clear()
         editor.apply()
         findNavController().navigate(ProfileDirections.actionProfileToSignIn())
