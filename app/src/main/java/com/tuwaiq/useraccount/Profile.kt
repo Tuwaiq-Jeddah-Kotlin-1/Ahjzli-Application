@@ -9,12 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,6 +31,11 @@ class Profile : Fragment() {
     private lateinit var editButton:Button
     private lateinit var logOut:TextView
     private lateinit var sharedPreferences: SharedPreferences
+
+    //bottom sheet
+    private lateinit var userNameBS:EditText
+    private lateinit var phoneNumberBS:EditText
+    private lateinit var editBS:Button
 
 
     override fun onCreateView(
@@ -43,10 +51,9 @@ class Profile : Fragment() {
         //shared preference
         sharedPreferences = this.requireActivity().getSharedPreferences("preference", Context.MODE_PRIVATE)
 
-
-        userNameProfile= view.findViewById(R.id.tiet_userName_profile)
-        emailProfile= view.findViewById(R.id.tiet_email_Profile)
-        phoneNumberProfile= view.findViewById(R.id.tiet_Phone_profile)
+        userNameProfile= view.findViewById(R.id.txt_userName_profile)
+        emailProfile= view.findViewById(R.id.txt_email_Profile)
+        phoneNumberProfile= view.findViewById(R.id.txt_Phone_profile)
         editButton = view.findViewById(R.id.btnEdit)
         logOut = view.findViewById(R.id.logOut)
 
@@ -54,7 +61,7 @@ class Profile : Fragment() {
             bottomSheet()
         }
         logOut.setOnClickListener {
-            getSharedPreferences()
+            getSPForLogOut()
         }
     }
 
@@ -65,9 +72,7 @@ class Profile : Fragment() {
             val db = FirebaseFirestore.getInstance()
             db.collection("UserAccount").document("$uId")
                 .get().addOnCompleteListener {
-
                     if (it.result?.exists()!!) {
-                        //+++++++++++++++++++++++++++++++++++++++++
                         val name = it.result!!.getString("userName")
                         val userEmail = it.result!!.getString("emailAddress")
                         val userPhone = it.result!!.getString("number")
@@ -88,26 +93,38 @@ class Profile : Fragment() {
             }
         }
     }
-
-    private fun bottomSheet() {
-        val view: View = layoutInflater.inflate(R.layout.bottom_sheet, null)
-        val builder = BottomSheetDialog(requireView()?.context)
-        builder.setTitle("Forgot Password")
-
-        /*continueBtn.setOnClickListener {
-            upDateUserInfo(userNameEt.text.toString(), userPhoneEt.text.toString())
-        }*/
-
-        builder.setContentView(view)
-
-        builder.show()
-    }
-    private fun getSharedPreferences(){
+    private fun getSPForLogOut(){
         val editor:SharedPreferences.Editor = sharedPreferences.edit()
         sharedPreferences.getString("EMAIL","")
         sharedPreferences.getString("PASSWORD","")
         editor.clear()
         editor.apply()
         findNavController().navigate(ProfileDirections.actionProfileToSignIn())
+    }
+
+    fun bottomSheet() {
+        val view: View = layoutInflater.inflate(R.layout.bottom_sheet, null)
+        userNameBS = view.findViewById(R.id.et_userName_profile)
+        phoneNumberBS = view.findViewById(R.id.et_PhoneNumber)
+        editBS = view.findViewById(R.id.btnEditConfirm)
+
+        userNameBS.setText(userNameProfile.text.toString())
+        phoneNumberBS.setText(phoneNumberProfile.text.toString())
+
+        editBS.setOnClickListener {
+            editProfile()
+        }
+        val builder = BottomSheetDialog(requireView()?.context)
+        builder.setTitle("edit")
+        builder.setContentView(view)
+        builder.show()
+    }
+
+    private fun editProfile(){
+        val uId = FirebaseAuth.getInstance().currentUser?.uid
+        val upDateUserData = Firebase.firestore.collection("UserAccount")
+        upDateUserData.document(uId.toString()).update("userName", userNameBS.text.toString())
+        upDateUserData.document(uId.toString()).update("number", phoneNumberBS.text.toString())
+        Toast.makeText(context,"edit is successful",Toast.LENGTH_LONG).show()
     }
 }

@@ -67,7 +67,7 @@
                     android:textSize="25sp" />
             </com.google.android.material.textfield.TextInputLayout>-->
             <TextView
-                android:id="@+id/tiet_userName_profile"
+                android:id="@+id/txt_userName_profile"
                 android:layout_width="301dp"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -99,7 +99,7 @@
             </com.google.android.material.textfield.TextInputLayout>-->
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiet_email_Profile"
+                android:id="@+id/txt_email_Profile"
                 android:layout_width="301dp"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -127,7 +127,7 @@
                     android:textSize="25sp" />
             </com.google.android.material.textfield.TextInputLayout>-->
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiet_Phone_profile"
+                android:id="@+id/txt_Phone_profile"
                 android:layout_width="301dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

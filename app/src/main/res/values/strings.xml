@@ -41,4 +41,7 @@
     <string name="my_profile">My Profile</string>
     <string name="edit">Edit</string>
     <string name="loge_out">Log out</string>
+    <string name="reserve">Reserve</string>
+    <string name="store_name">Store Name</string>
+    <string name="number_of_tables">Number of tables</string>
 </resources>

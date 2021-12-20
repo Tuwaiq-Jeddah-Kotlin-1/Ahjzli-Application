@@ -68,7 +68,11 @@
         android:id="@+id/mainView"
         android:name="com.tuwaiq.useraccount.rv_main_view.MainInterface"
         android:label="fragment_main_view"
-        tools:layout="@layout/fragment_main_view" />
+        tools:layout="@layout/fragment_main_view" >
+        <action
+            android:id="@+id/action_mainView_to_itemListDialogFragment"
+            app:destination="@id/itemListDialogFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="com.tuwaiq.useraccount.Profile"
@@ -86,7 +90,16 @@
         android:label="Settings" />
     <fragment
         android:id="@+id/reservation"
-        android:name="com.tuwaiq.useraccount.Reservation"
+        android:name="com.tuwaiq.useraccount.rv_reservation.Reservation"
         android:label="fragment_reservation"
         tools:layout="@layout/fragment_reservation" />
+    <dialog
+        android:id="@+id/itemListDialogFragment"
+        android:name="com.tuwaiq.useraccount.ItemListDialogFragment"
+        android:label="fragment_item_list_dialog_list_dialog"
+        tools:layout="@layout/fragment_item_list_dialog_list_dialog" >
+        <argument
+            android:name="storeData"
+            app:argType="com.tuwaiq.useraccount.rv_main_view.GetStoreData" />
+    </dialog>
 </navigation>
