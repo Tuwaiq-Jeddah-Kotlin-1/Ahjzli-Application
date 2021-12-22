@@ -95,11 +95,14 @@
         tools:layout="@layout/fragment_reservation" />
     <dialog
         android:id="@+id/itemListDialogFragment"
-        android:name="com.tuwaiq.useraccount.ItemListDialogFragment"
+        android:name="com.tuwaiq.useraccount.bottomsheet_reservation.ItemListDialogFragment"
         android:label="fragment_item_list_dialog_list_dialog"
         tools:layout="@layout/fragment_item_list_dialog_list_dialog" >
         <argument
             android:name="storeData"
             app:argType="com.tuwaiq.useraccount.rv_main_view.GetStoreData" />
+        <action
+            android:id="@+id/action_itemListDialogFragment_to_reservation"
+            app:destination="@id/reservation" />
     </dialog>
 </navigation>

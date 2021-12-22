@@ -47,9 +47,8 @@ class ForgetPassword : Fragment() {
                             context, "E-mail send successful to reset your password",
                             Toast.LENGTH_LONG
                         ).show()
-                        val action: NavDirections =
-                            ForgetPasswordDirections.actionForgetPasswordToSignIn()
-                        view?.findNavController()?.navigate(action)
+                        view?.findNavController()
+                            ?.navigate(ForgetPasswordDirections.actionForgetPasswordToSignIn())
                     } else {
                         Toast.makeText(
                             context, "The email wasn't correct",

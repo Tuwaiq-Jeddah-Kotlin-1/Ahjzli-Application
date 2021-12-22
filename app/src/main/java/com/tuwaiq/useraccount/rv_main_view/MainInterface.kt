@@ -38,11 +38,12 @@ class MainInterface : Fragment() {
         sList = mutableSetOf()
         myAdapter = MainViewAdapter(sList)
         rv.adapter = myAdapter
+
         getTheDataList()
         removeTheDataList()
-
     }
 
+    //check the state if true
     private fun getTheDataList() {
         db = FirebaseFirestore.getInstance()
             db.collection("StoreOwner").whereEqualTo("publish",true)
@@ -50,7 +51,6 @@ class MainInterface : Fragment() {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if(error != null){
-
                         Log.e("Firestore Add", error.message.toString())
                         return
                     }
@@ -61,20 +61,17 @@ class MainInterface : Fragment() {
                     }
                     myAdapter.notifyDataSetChanged()
                 }
-
             })
-
-
     }
+
+    //check the state if false
     private fun removeTheDataList(){
         db2 = FirebaseFirestore.getInstance()
-
         db2.collection("StoreOwner").whereEqualTo("publish",false)
             .addSnapshotListener(object :EventListener<QuerySnapshot>{
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if(error != null){
-
                         Log.e("Firestore Remove", error.message.toString())
                         return
                     }
@@ -85,7 +82,6 @@ class MainInterface : Fragment() {
                     }
                     myAdapter.notifyDataSetChanged()
                 }
-
             })
     }
 }

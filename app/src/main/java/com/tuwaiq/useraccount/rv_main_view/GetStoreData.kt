@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class GetStoreData(
+    var idOwner :String ="",
     var storeName:String="",
     var branchName:String="",
     var branchLocation:String=""

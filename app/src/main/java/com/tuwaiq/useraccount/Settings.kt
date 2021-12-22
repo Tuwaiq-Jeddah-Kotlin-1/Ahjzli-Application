@@ -21,7 +21,6 @@ class Settings : PreferenceFragmentCompat() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
-
-
     }
+
 }

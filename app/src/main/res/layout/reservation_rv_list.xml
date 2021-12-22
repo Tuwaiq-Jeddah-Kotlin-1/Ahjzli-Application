@@ -26,7 +26,7 @@
         app:layout_constraintVertical_bias="0.207" />
 
     <TextView
-        android:id="@+id/txtRestaurantBranch"
+        android:id="@+id/txtRestaurantBranch_reserve"
         android:layout_width="260dp"
         android:layout_height="27dp"
         android:layout_marginStart="20dp"
@@ -34,13 +34,13 @@
         android:textSize="15sp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/etLocation_reserve"
+        app:layout_constraintEnd_toStartOf="@+id/IVLocation_reserve"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtRestaurantName_reserve"
         app:layout_constraintVertical_bias="0.333" />
 
     <ImageView
-        android:id="@+id/etLocation_reserve"
+        android:id="@+id/IVLocation_reserve"
         android:layout_width="30dp"
         android:layout_height="25dp"
         android:layout_marginEnd="20dp"
