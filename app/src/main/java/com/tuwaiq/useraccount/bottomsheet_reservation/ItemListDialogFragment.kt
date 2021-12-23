@@ -68,7 +68,16 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun addReserve() {
+        //reserve Date and time
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-SS")
+        val formatted = current.format(formatter)
+
+        val requestId= FirebaseAuth.getInstance().currentUser?.uid
+
         val reserve = ReservationData()
+        reserve.ownerId = args.storeData.idOwner
+        reserve.idRq = "$requestId $formatted"
         reserve.branchName = args.storeData.storeName
         reserve.storeName = args.storeData.branchName
         reserve.maps = args.storeData.branchLocation
@@ -76,12 +85,8 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
         reserve.userId = uId.toString()
         reserve.userName = name
         reserve.userPhone = phone
+        reserve.date = formatted
 
-        //reserve Date and time
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-SS")
-        val formatted = current.format(formatter)
-        db.collection("StoreOwner").document(args.storeData.idOwner.toString())
-            .collection("Reservation").document(formatted).set(reserve)
+        db.collection("Reservation").document(reserve.idRq).set(reserve)
     }
 }

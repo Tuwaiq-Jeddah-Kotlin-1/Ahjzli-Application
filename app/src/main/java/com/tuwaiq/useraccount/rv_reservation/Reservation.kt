@@ -13,14 +13,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import com.tuwaiq.useraccount.R
+import com.tuwaiq.useraccount.rv_main_view.GetStoreData
 
 
 class Reservation : Fragment() {
     private lateinit var db:FirebaseFirestore
-    val uId = FirebaseAuth.getInstance().currentUser?.uid
     private lateinit var reservationRV: RecyclerView
     private lateinit var reservationAdapter: ReservationAdapter
     private lateinit var rList:MutableSet<ReservationData>
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -36,34 +37,34 @@ class Reservation : Fragment() {
         rList = mutableSetOf()
         reservationAdapter = ReservationAdapter(rList)
         reservationRV.adapter = reservationAdapter
+
+
         getTheReservationList()
     }
-
 
     private fun getTheReservationList() {
 
         db = FirebaseFirestore.getInstance()
         val id =FirebaseAuth.getInstance().currentUser?.uid
-        db.collection("StoreOwner").document("5MwRVuvViFadf17yElZuB2puYXt1")
-            .collection("Reservation")
+        db.collection("Reservation").whereEqualTo("userId", id.toString())
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
 
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                    if(error != null){
-
+                    if (error != null) {
                         Log.e("Firestore Add", error.message.toString())
                         return
                     }
-                    for (dc: DocumentChange in value?.documentChanges!!){
-                        if (dc.type == DocumentChange.Type.ADDED){
+                    for (dc: DocumentChange in value?.documentChanges!!) {
+                        if (dc.type == DocumentChange.Type.ADDED) {
 
-                           rList.add(dc.document.toObject(ReservationData::class.java))
+                            rList.add(dc.document.toObject(ReservationData::class.java))
                         }
                     }
                     reservationAdapter.notifyDataSetChanged()
                 }
             })
-    }
-
+        }
 }
+
+

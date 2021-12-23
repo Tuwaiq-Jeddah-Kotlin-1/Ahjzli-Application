@@ -7,13 +7,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.SearchView
+import androidx.core.view.contains
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
 import com.google.protobuf.Value
 import com.tuwaiq.useraccount.R
 import org.w3c.dom.Document
+import java.util.*
+import android.widget.ListAdapter as ListAdapter
 
 
 class MainInterface : Fragment() {
@@ -21,8 +27,10 @@ class MainInterface : Fragment() {
     private lateinit var rv:RecyclerView
     private lateinit var myAdapter:MainViewAdapter
     private lateinit var sList:MutableSet<GetStoreData>
+    private lateinit var displayList:MutableSet<GetStoreData>
     private lateinit var db:FirebaseFirestore
     private lateinit var db2:FirebaseFirestore
+    private lateinit var search:SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -32,6 +40,7 @@ class MainInterface : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        search = view.findViewById(R.id.searchView)
         rv = view.findViewById(R.id.storeRV)
         rv.layoutManager = LinearLayoutManager(this.context)
         rv.setHasFixedSize(true)
@@ -39,8 +48,23 @@ class MainInterface : Fragment() {
         myAdapter = MainViewAdapter(sList)
         rv.adapter = myAdapter
 
+
+
         getTheDataList()
         removeTheDataList()
+
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                return true
+            }
+
+        })
     }
 
     //check the state if true
