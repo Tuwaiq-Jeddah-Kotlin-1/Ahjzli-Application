@@ -1,20 +1,62 @@
 package com.tuwaiq.useraccount.rv_main_view
 
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.findFragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.tuwaiq.useraccount.R
+import java.util.*
+import kotlin.collections.ArrayList
 
-class MainViewAdapter(private val storeList:Set<GetStoreData>,
-                      ): RecyclerView.Adapter<CustomHolder>() {
+private const val TAG = "MainViewAdapter"
+class MainViewAdapter(var  storeFilterList: MutableList<GetStoreData>,
+                    ): RecyclerView.Adapter<CustomHolder>(),Filterable {
+    var storeList = mutableListOf<GetStoreData>()
+
+    init {
+        Log.d(TAG, "$storeFilterList: ")
+        storeFilterList.forEach {
+            storeList.add(it)
+            Log.d(TAG, "$it: ")
+        }
+    }
+
+    override fun getFilter(): Filter = object : Filter(){
+        override fun performFiltering(constraint: CharSequence?): FilterResults? {
+            val filteredList: MutableList<GetStoreData> = ArrayList()
+
+            if (constraint == null || constraint.isEmpty()) {
+                filteredList.addAll(storeList)
+                Log.d(TAG, "performFiltering: $storeList")
+            } else {
+                val filterPattern = constraint.toString().lowercase(Locale.getDefault()).trim { it <= ' ' }
+                for (item in storeList) {
+                    if (item.storeName.lowercase(Locale.getDefault()).contains(filterPattern)) {
+                        filteredList.add(item)
+                    }
+                }
+            }
+            val results = FilterResults()
+            results.values = filteredList
+            return results
+        }
+
+        override fun publishResults(constraint: CharSequence?, results: FilterResults) {
+            storeFilterList.clear()
+            storeFilterList.addAll(results.values as List<GetStoreData>)
+            notifyDataSetChanged()
+        }
+    }
+
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomHolder {
         // inflate layout
         val view = LayoutInflater.from(parent.context).inflate(R.layout.restaurant_rv_list,parent,false)
@@ -22,7 +64,7 @@ class MainViewAdapter(private val storeList:Set<GetStoreData>,
     }
 
     override fun onBindViewHolder(holder: CustomHolder, position: Int) {
-        val store = storeList.toList()[position]
+        val store = storeFilterList.toList()[position]
         holder.sName.text = store.storeName
         holder.storeBName.text = store.branchName
         holder.map = store.branchLocation
@@ -32,9 +74,10 @@ class MainViewAdapter(private val storeList:Set<GetStoreData>,
         }
     }
     //take the size
-    override fun getItemCount(): Int = storeList.size
+    override fun getItemCount(): Int = storeFilterList.size
 
-    }
+
+}
 
 
 //init the values
@@ -63,7 +106,7 @@ class CustomHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnCli
            findNavController(itemView.findFragment()).navigate(action)
         }
 
-    }
+}
 
 
 

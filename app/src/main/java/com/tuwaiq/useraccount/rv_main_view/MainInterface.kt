@@ -19,6 +19,7 @@ import com.google.protobuf.Value
 import com.tuwaiq.useraccount.R
 import org.w3c.dom.Document
 import java.util.*
+import kotlin.collections.ArrayList
 import android.widget.ListAdapter as ListAdapter
 
 
@@ -26,11 +27,11 @@ class MainInterface : Fragment() {
 
     private lateinit var rv:RecyclerView
     private lateinit var myAdapter:MainViewAdapter
-    private lateinit var sList:MutableSet<GetStoreData>
-    private lateinit var displayList:MutableSet<GetStoreData>
+    private lateinit var sList:ArrayList<GetStoreData>
     private lateinit var db:FirebaseFirestore
     private lateinit var db2:FirebaseFirestore
     private lateinit var search:SearchView
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -44,28 +45,34 @@ class MainInterface : Fragment() {
         rv = view.findViewById(R.id.storeRV)
         rv.layoutManager = LinearLayoutManager(this.context)
         rv.setHasFixedSize(true)
-        sList = mutableSetOf()
-        myAdapter = MainViewAdapter(sList)
-        rv.adapter = myAdapter
 
 
 
         getTheDataList()
-        removeTheDataList()
+      //  removeTheDataList()
 
-        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        //search view
+        search.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-
-                return true
+                myAdapter.filter.filter(newText)
+                return false
             }
 
         })
     }
+/*    fun loop(keyword:String):ArrayList<GetStoreData>{
+        lateinit var result:ArrayList<GetStoreData>
+        for (i in 0.. sList.size){
+            if(sList[i].storeName.contains(keyword)){
+                result.add(sList[i])
+            }
+        }
+        return result
+    }*/
 
     //check the state if true
     private fun getTheDataList() {
@@ -78,12 +85,16 @@ class MainInterface : Fragment() {
                         Log.e("Firestore Add", error.message.toString())
                         return
                     }
-                    for (dc:DocumentChange in value?.documentChanges!!){
-                        if (dc.type == DocumentChange.Type.ADDED){
-                            sList.add(dc.document.toObject(GetStoreData::class.java))
-                        }
+                    if (value != null) {
+                        myAdapter = MainViewAdapter(value.toObjects(GetStoreData::class.java))
+                        rv.adapter = myAdapter
                     }
-                    myAdapter.notifyDataSetChanged()
+//                    for (dc:DocumentChange in value?.documentChanges!!){
+//                        if (dc.type == DocumentChange.Type.ADDED){
+//                            sList.add(dc.document.toObject(GetStoreData::class.java))
+//                        }
+//                    }
+
                 }
             })
     }
@@ -99,12 +110,17 @@ class MainInterface : Fragment() {
                         Log.e("Firestore Remove", error.message.toString())
                         return
                     }
-                    for (dc:DocumentChange in value?.documentChanges!!){
-                        if (dc.type == DocumentChange.Type.ADDED){
-                            sList.remove(dc.document.toObject(GetStoreData::class.java))
-                        }
+
+                    if (value != null) {
+                        myAdapter = MainViewAdapter(value.toObjects(GetStoreData::class.java))
+                        rv.adapter = myAdapter
                     }
-                    myAdapter.notifyDataSetChanged()
+//                    for (dc:DocumentChange in value?.documentChanges!!){
+//                        if (dc.type == DocumentChange.Type.ADDED){
+//                            sList.remove(dc.document.toObject(GetStoreData::class.java))
+//                        }
+//                    }
+//                    myAdapter.notifyDataSetChanged()
                 }
             })
     }
