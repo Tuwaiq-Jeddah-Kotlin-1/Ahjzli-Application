@@ -27,11 +27,8 @@ class MainInterface : Fragment() {
 
     private lateinit var rv:RecyclerView
     private lateinit var myAdapter:MainViewAdapter
-    private lateinit var sList:ArrayList<GetStoreData>
     private lateinit var db:FirebaseFirestore
-    private lateinit var db2:FirebaseFirestore
     private lateinit var search:SearchView
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -39,18 +36,13 @@ class MainInterface : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main_view, container, false)
         return view
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         search = view.findViewById(R.id.searchView)
         rv = view.findViewById(R.id.storeRV)
         rv.layoutManager = LinearLayoutManager(this.context)
         rv.setHasFixedSize(true)
 
-
-
         getTheDataList()
-      //  removeTheDataList()
-
         //search view
         search.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -64,16 +56,6 @@ class MainInterface : Fragment() {
 
         })
     }
-/*    fun loop(keyword:String):ArrayList<GetStoreData>{
-        lateinit var result:ArrayList<GetStoreData>
-        for (i in 0.. sList.size){
-            if(sList[i].storeName.contains(keyword)){
-                result.add(sList[i])
-            }
-        }
-        return result
-    }*/
-
     //check the state if true
     private fun getTheDataList() {
         db = FirebaseFirestore.getInstance()
@@ -89,38 +71,6 @@ class MainInterface : Fragment() {
                         myAdapter = MainViewAdapter(value.toObjects(GetStoreData::class.java))
                         rv.adapter = myAdapter
                     }
-//                    for (dc:DocumentChange in value?.documentChanges!!){
-//                        if (dc.type == DocumentChange.Type.ADDED){
-//                            sList.add(dc.document.toObject(GetStoreData::class.java))
-//                        }
-//                    }
-
-                }
-            })
-    }
-
-    //check the state if false
-    private fun removeTheDataList(){
-        db2 = FirebaseFirestore.getInstance()
-        db2.collection("StoreOwner").whereEqualTo("publish",false)
-            .addSnapshotListener(object :EventListener<QuerySnapshot>{
-                @SuppressLint("NotifyDataSetChanged")
-                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                    if(error != null){
-                        Log.e("Firestore Remove", error.message.toString())
-                        return
-                    }
-
-                    if (value != null) {
-                        myAdapter = MainViewAdapter(value.toObjects(GetStoreData::class.java))
-                        rv.adapter = myAdapter
-                    }
-//                    for (dc:DocumentChange in value?.documentChanges!!){
-//                        if (dc.type == DocumentChange.Type.ADDED){
-//                            sList.remove(dc.document.toObject(GetStoreData::class.java))
-//                        }
-//                    }
-//                    myAdapter.notifyDataSetChanged()
                 }
             })
     }
