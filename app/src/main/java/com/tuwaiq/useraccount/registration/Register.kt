@@ -1,5 +1,7 @@
 package com.tuwaiq.useraccount.registration
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -29,6 +31,8 @@ class Register : Fragment() {
     private lateinit var passwordAccount: TextInputEditText
     private lateinit var phoneNumberAccount: TextInputEditText
     private lateinit var signUpButton: Button
+    private lateinit var sharedPreferences2: SharedPreferences
+
     private val db = Firebase.firestore.collection("UserAccount")
 
     override fun onCreateView(
@@ -39,6 +43,8 @@ class Register : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        sharedPreferences2 = this.requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE)
 
         //back to sign in
         haveAccount = view.findViewById(R.id.txt_have_account)
@@ -104,6 +110,7 @@ class Register : Fragment() {
             withContext(Dispatchers.Main) {
                 val action: NavDirections = RegisterDirections.actionRegisterToMainView()
                 view?.findNavController()?.navigate(action)
+                //saveSharedPreference()
                 Toast.makeText(context, "saved data", Toast.LENGTH_LONG).show()
             }
 
@@ -113,5 +120,4 @@ class Register : Fragment() {
             }
         }
     }
-
 }

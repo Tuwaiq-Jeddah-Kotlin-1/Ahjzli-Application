@@ -63,6 +63,7 @@
             android:layout_marginTop="40dp"
             android:background="@drawable/btn_shape_reservation"
             android:backgroundTint="@color/green"
+            android:backgroundTintMode="src_in"
             android:text="@string/reserve"
             android:textSize="25sp"
             android:textStyle="bold"  />

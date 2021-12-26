@@ -31,6 +31,7 @@ class Profile : Fragment() {
     private lateinit var editButton:Button
     private lateinit var logOut:TextView
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var sharedPreferences2: SharedPreferences
 
     //bottom sheet
     private lateinit var userNameBS:EditText
@@ -51,11 +52,22 @@ class Profile : Fragment() {
         //shared preference
         sharedPreferences = this.requireActivity().getSharedPreferences("preference", Context.MODE_PRIVATE)
 
+
         userNameProfile= view.findViewById(R.id.txt_userName_profile)
         emailProfile= view.findViewById(R.id.txt_email_Profile)
         phoneNumberProfile= view.findViewById(R.id.txt_Phone_profile)
         editButton = view.findViewById(R.id.btnEdit)
         logOut = view.findViewById(R.id.logOut)
+
+        //get the info from the sp
+        sharedPreferences2 = this.requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE)
+        val sp1 = sharedPreferences2.getString("spUserName"," ")
+        val sp2 = sharedPreferences2.getString("spEmail"," ")
+        val sp3 = sharedPreferences2.getString("spPhoneNumber"," ")
+        userNameProfile.text= sp1
+        emailProfile.text= sp2
+        phoneNumberProfile.text= sp3
+
 
         editButton.setOnClickListener {
             bottomSheet()
@@ -66,7 +78,6 @@ class Profile : Fragment() {
     }
 
     fun getUserInfo() = CoroutineScope(Dispatchers.IO).launch {
-
         val uId =FirebaseAuth.getInstance().currentUser?.uid
         try {
             val db = FirebaseFirestore.getInstance()
@@ -77,9 +88,12 @@ class Profile : Fragment() {
                         val userEmail = it.result!!.getString("emailAddress")
                         val userPhone = it.result!!.getString("number")
 
-                       userNameProfile.text= name.toString()
-                       emailProfile.text= userEmail.toString()
-                       phoneNumberProfile.text= userPhone.toString()
+                        sharedPreferences2 = requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE)
+                        val editor3:SharedPreferences.Editor = sharedPreferences2.edit()
+                        editor3.putString("spUserName",name.toString())
+                        editor3.putString("spEmail",userEmail.toString())
+                        editor3.putString("spPhoneNumber",userPhone.toString())
+                        editor3.apply()
 
                     } else {
                         Log.e("error \n", "errooooooorr")
@@ -102,7 +116,7 @@ class Profile : Fragment() {
         findNavController().navigate(ProfileDirections.actionProfileToSignIn())
     }
 
-    fun bottomSheet() {
+    private fun bottomSheet() {
         val view: View = layoutInflater.inflate(R.layout.bottom_sheet, null)
         userNameBS = view.findViewById(R.id.et_userName_profile)
         phoneNumberBS = view.findViewById(R.id.et_PhoneNumber)
@@ -110,9 +124,14 @@ class Profile : Fragment() {
 
         userNameBS.setText(userNameProfile.text.toString())
         phoneNumberBS.setText(phoneNumberProfile.text.toString())
-
         editBS.setOnClickListener {
             editProfile()
+            //save the changes in the sp
+            sharedPreferences2 = requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE)
+            val editor3:SharedPreferences.Editor = sharedPreferences2.edit()
+            editor3.putString("spUserName",userNameBS.text.toString())
+            editor3.putString("spPhoneNumber",phoneNumberBS.text.toString())
+            editor3.apply()
         }
         val builder = BottomSheetDialog(requireView()?.context)
         builder.setTitle("edit")
@@ -126,5 +145,6 @@ class Profile : Fragment() {
         upDateUserData.document(uId.toString()).update("userName", userNameBS.text.toString())
         upDateUserData.document(uId.toString()).update("number", phoneNumberBS.text.toString())
         Toast.makeText(context,"edit is successful",Toast.LENGTH_LONG).show()
+
     }
 }
