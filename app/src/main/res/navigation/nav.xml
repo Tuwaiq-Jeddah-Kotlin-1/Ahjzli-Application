@@ -85,10 +85,6 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/settings"
-        android:name="com.tuwaiq.useraccount.Settings"
-        android:label="Settings" />
-    <fragment
         android:id="@+id/reservation"
         android:name="com.tuwaiq.useraccount.rv_reservation.Reservation"
         android:label="fragment_reservation"
@@ -105,4 +101,9 @@
             android:id="@+id/action_itemListDialogFragment_to_reservation"
             app:destination="@id/reservation" />
     </dialog>
+    <fragment
+        android:id="@+id/setting"
+        android:name="com.tuwaiq.useraccount.Setting"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
 </navigation>

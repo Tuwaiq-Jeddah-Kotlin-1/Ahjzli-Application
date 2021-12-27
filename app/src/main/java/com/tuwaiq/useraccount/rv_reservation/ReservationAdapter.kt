@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.tuwaiq.useraccount.R
 
-class ReservationAdapter(private val reservationList: Set<ReservationData>,
+class ReservationAdapter(private val reservationList: MutableList<ReservationData>,
 ): RecyclerView.Adapter<ReservationHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReservationHolder {
         // inflate layout

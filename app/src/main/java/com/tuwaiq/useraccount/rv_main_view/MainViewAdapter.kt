@@ -69,6 +69,8 @@ class MainViewAdapter(var  storeFilterList: MutableList<GetStoreData>,
         holder.storeBName.text = store.branchName
         holder.map = store.branchLocation
         holder.idOwner =store.idOwner
+
+       holder.maxP = store.maxPeople
         holder.storeBLocation.setOnClickListener{
             Toast.makeText(holder.itemView.context," map is ${store.branchLocation}",Toast.LENGTH_LONG).show()
         }
@@ -88,6 +90,7 @@ class CustomHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnCli
     val storeBLocation: ImageView = itemView.findViewById(R.id.etLocation_reserve)
     lateinit var map: String
     lateinit var idOwner:String
+      var maxP:Int =1
 
 
     init {
@@ -101,6 +104,8 @@ class CustomHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnCli
         parcelize.idOwner = idOwner.toString()
         parcelize.branchLocation =map
         parcelize.branchLocation = storeBLocation.toString()
+       parcelize.maxPeople = maxP
+
         val action: NavDirections =
                 MainInterfaceDirections.actionMainViewToItemListDialogFragment(parcelize)
            findNavController(itemView.findFragment()).navigate(action)

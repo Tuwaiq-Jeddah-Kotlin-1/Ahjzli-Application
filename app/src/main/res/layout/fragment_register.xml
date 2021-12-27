@@ -60,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:hint="@string/user_name"
+                    android:textColor="@color/green"
                     android:inputType="textPersonName"
                     android:textSize="25sp" />
             </com.google.android.material.textfield.TextInputLayout>

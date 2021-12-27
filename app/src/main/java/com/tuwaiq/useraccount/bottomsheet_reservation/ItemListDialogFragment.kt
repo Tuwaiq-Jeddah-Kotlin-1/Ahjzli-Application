@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.tuwaiq.useraccount.R
 import com.tuwaiq.useraccount.rv_reservation.ReservationData
 import java.time.LocalDateTime
@@ -28,6 +31,8 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
     private var db = FirebaseFirestore.getInstance()
     private lateinit var name: String
     private lateinit var phone: String
+    private var enterNumber:Int = 1
+    private  var maxP:Int=0
 
 
     override fun onCreateView(
@@ -62,10 +67,30 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
 
 
         reservationButton.setOnClickListener {
-            addReserve()
-            findNavController().navigate(ItemListDialogFragmentDirections.actionItemListDialogFragmentToReservation())
+
+            maxP=args.storeData.maxPeople
+            enterNumber = numberOfPeople.text.toString().toInt()
+            //Toast.makeText(context,"max $maxP",Toast.LENGTH_SHORT).show()
+
+            if ( enterNumber <= maxP){
+                maxP -= enterNumber
+                Toast.makeText(context,"max $maxP",Toast.LENGTH_SHORT).show()
+                addReserve()
+                upDateTheNumberOfPeople()
+            }else{
+                Toast.makeText(context,"You can reserve: $maxP more",Toast.LENGTH_SHORT).show()
+            }
         }
     }
+
+
+    private fun upDateTheNumberOfPeople(){
+        val upDateUserData = Firebase.firestore.collection("StoreOwner")
+        upDateUserData.document(args.storeData.idOwner).update("maxPeople", maxP)
+        Toast.makeText(context,"edit is successful",Toast.LENGTH_LONG).show()
+    }
+
+
 
     private fun addReserve() {
         //reserve Date and time
@@ -86,7 +111,8 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
         reserve.userName = name
         reserve.userPhone = phone
         reserve.date = formatted
-
         db.collection("Reservation").document(reserve.idRq).set(reserve)
+        findNavController().navigate(ItemListDialogFragmentDirections.actionItemListDialogFragmentToReservation())
+
     }
 }

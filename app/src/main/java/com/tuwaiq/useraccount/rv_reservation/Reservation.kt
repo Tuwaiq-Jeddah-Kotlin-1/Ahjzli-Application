@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -20,7 +21,7 @@ class Reservation : Fragment() {
     private lateinit var db:FirebaseFirestore
     private lateinit var reservationRV: RecyclerView
     private lateinit var reservationAdapter: ReservationAdapter
-    private lateinit var rList:MutableSet<ReservationData>
+    private lateinit var rList:MutableList<ReservationData>
 
 
     override fun onCreateView(
@@ -34,14 +35,51 @@ class Reservation : Fragment() {
         reservationRV = view.findViewById(R.id.reservationRV)
         reservationRV.layoutManager = LinearLayoutManager(this.context)
         reservationRV.setHasFixedSize(true)
-        rList = mutableSetOf()
+        rList = mutableListOf()
         reservationAdapter = ReservationAdapter(rList)
         reservationRV.adapter = reservationAdapter
 
+        val taskTouchHelper= ItemTouchHelper(simpleCallback)
+        taskTouchHelper.attachToRecyclerView(reservationRV)
 
         getTheReservationList()
     }
 
+    private var simpleCallback= object : ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT.or(ItemTouchHelper.RIGHT)){
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
+            return true
+        }
+
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            val position = viewHolder.layoutPosition
+            val deletedFav = rList[position]
+
+            when(direction){
+                ItemTouchHelper.LEFT -> {
+                    deleteReservation(deletedFav)
+                    rList.remove(deletedFav)
+                    ReservationAdapter(rList).notifyItemRemoved(position)
+                }
+
+                ItemTouchHelper.RIGHT -> {
+                    deleteReservation(deletedFav)
+                    rList.remove(deletedFav)
+                    ReservationAdapter(rList).notifyItemRemoved(position)
+
+                }
+            }
+
+        }
+    }
+    private fun deleteReservation(delete:ReservationData){
+        db.collection("Reservation").document(delete.idRq).delete()
+
+    }
     private fun getTheReservationList() {
 
         db = FirebaseFirestore.getInstance()
