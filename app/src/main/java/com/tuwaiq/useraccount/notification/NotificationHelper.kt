@@ -9,6 +9,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.tuwaiq.useraccount.MainActivity
+import com.tuwaiq.useraccount.R
 
 class NotificationHelper(val context: Context) {
     private val CHANNEL_ID = "movie_channel_id"
@@ -21,7 +22,7 @@ class NotificationHelper(val context: Context) {
         }
         val pendingIntent = PendingIntent.getActivity(context,0,intent,0)
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(android.R.drawable.btn_star_big_on)
+            .setSmallIcon(R.drawable.my_logo)
             .setContentTitle(title)
             .setContentText(message)
             .setContentIntent(pendingIntent)

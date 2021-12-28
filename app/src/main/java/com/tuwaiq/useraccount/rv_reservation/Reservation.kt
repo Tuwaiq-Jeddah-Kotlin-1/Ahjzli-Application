@@ -22,6 +22,8 @@ class Reservation : Fragment() {
     private lateinit var reservationRV: RecyclerView
     private lateinit var reservationAdapter: ReservationAdapter
     private lateinit var rList:MutableList<ReservationData>
+    private var enterNumber:Int = 1
+    private  var maxP:Int=0
 
 
     override fun onCreateView(
@@ -61,6 +63,7 @@ class Reservation : Fragment() {
                 ItemTouchHelper.LEFT -> {
                     deleteReservation(deletedFav)
                     rList.remove(deletedFav)
+
                     ReservationAdapter(rList).notifyItemRemoved(position)
                 }
                 ItemTouchHelper.RIGHT -> {

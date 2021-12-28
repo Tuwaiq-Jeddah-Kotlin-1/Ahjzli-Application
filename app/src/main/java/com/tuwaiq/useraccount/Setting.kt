@@ -1,5 +1,6 @@
 package com.tuwaiq.useraccount
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Switch
 import android.widget.TextView
 import androidx.core.app.ActivityCompat.recreate
 import java.util.*
@@ -16,6 +18,8 @@ import java.util.*
 
 class Setting : Fragment() {
     private lateinit var languageTextView:TextView
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    private lateinit var switch: Switch
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -26,10 +30,17 @@ class Setting : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         languageTextView = view.findViewById(R.id.language)
+        switch = view.findViewById(R.id.swMode)
+
+        switch.setOnCheckedChangeListener{_, isChecked ->
+            val mode: Boolean = isChecked
+
+        }
 
         languageTextView.setOnClickListener {
             showChangeLanguage()
         }
+
 
     }
     //show change language
