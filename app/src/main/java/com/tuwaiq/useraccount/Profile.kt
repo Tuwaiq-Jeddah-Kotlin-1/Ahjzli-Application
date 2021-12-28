@@ -32,7 +32,6 @@ class Profile : Fragment() {
     private lateinit var logOut:TextView
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var sharedPreferences2: SharedPreferences
-
     //bottom sheet
     private lateinit var userNameBS:EditText
     private lateinit var phoneNumberBS:EditText

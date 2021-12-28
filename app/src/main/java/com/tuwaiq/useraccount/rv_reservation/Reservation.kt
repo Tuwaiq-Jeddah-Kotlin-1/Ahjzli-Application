@@ -54,34 +54,28 @@ class Reservation : Fragment() {
             return true
         }
 
-
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             val position = viewHolder.layoutPosition
             val deletedFav = rList[position]
-
             when(direction){
                 ItemTouchHelper.LEFT -> {
                     deleteReservation(deletedFav)
                     rList.remove(deletedFav)
                     ReservationAdapter(rList).notifyItemRemoved(position)
                 }
-
                 ItemTouchHelper.RIGHT -> {
                     deleteReservation(deletedFav)
                     rList.remove(deletedFav)
                     ReservationAdapter(rList).notifyItemRemoved(position)
-
                 }
             }
-
         }
     }
     private fun deleteReservation(delete:ReservationData){
         db.collection("Reservation").document(delete.idRq).delete()
-
     }
-    private fun getTheReservationList() {
 
+    private fun getTheReservationList() {
         db = FirebaseFirestore.getInstance()
         val id =FirebaseAuth.getInstance().currentUser?.uid
         db.collection("Reservation").whereEqualTo("userId", id.toString())
@@ -103,6 +97,8 @@ class Reservation : Fragment() {
                 }
             })
         }
+
+
 }
 
 

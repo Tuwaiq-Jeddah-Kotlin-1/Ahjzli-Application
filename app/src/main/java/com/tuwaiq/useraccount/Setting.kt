@@ -49,7 +49,7 @@ class Setting : Fragment() {
         val mDialog = mBuilder.create()
         mDialog.show()
     }
-
+    //save and set language
     private fun setLocate(lang: String) {
         val locale = Locale(lang)
         Locale.setDefault(locale)
@@ -60,9 +60,4 @@ class Setting : Fragment() {
         editor.putString("My_Lang", lang)
         editor.apply()
     }
-/*    private fun loadLocate() {
-        val sharedPreferences = this.requireActivity().getSharedPreferences("Settings", Activity.MODE_PRIVATE)
-        val language = sharedPreferences.getString("My_Lang", "")!!
-        setLocate(language)
-    }*/
 }

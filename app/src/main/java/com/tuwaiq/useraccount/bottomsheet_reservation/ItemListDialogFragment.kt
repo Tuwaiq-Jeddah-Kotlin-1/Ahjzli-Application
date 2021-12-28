@@ -11,12 +11,18 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.tuwaiq.useraccount.MainActivity
 import com.tuwaiq.useraccount.R
+import com.tuwaiq.useraccount.notification.AhjzliNotificationRepo
 import com.tuwaiq.useraccount.rv_reservation.ReservationData
+import com.tuwaiq.useraccount.notification.AhjzliWorker
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -54,7 +60,6 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
         sName.setText(args.storeData.storeName)
         bName.setText(args.storeData.branchName)
 
-
         //get the name and the phone number of the user
         val db2 = FirebaseFirestore.getInstance()
         db2.collection("UserAccount").document("$uId")
@@ -65,42 +70,32 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
                 }
             }
 
-
         reservationButton.setOnClickListener {
-
             maxP=args.storeData.maxPeople
             enterNumber = numberOfPeople.text.toString().toInt()
-            //Toast.makeText(context,"max $maxP",Toast.LENGTH_SHORT).show()
-
             if ( enterNumber <= maxP){
                 maxP -= enterNumber
-                Toast.makeText(context,"max $maxP",Toast.LENGTH_SHORT).show()
                 addReserve()
                 upDateTheNumberOfPeople()
             }else{
-                Toast.makeText(context,"You can reserve: $maxP more",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"You can't reserve more than: $maxP",Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-
     private fun upDateTheNumberOfPeople(){
         val upDateUserData = Firebase.firestore.collection("StoreOwner")
         upDateUserData.document(args.storeData.idOwner).update("maxPeople", maxP)
-        Toast.makeText(context,"edit is successful",Toast.LENGTH_LONG).show()
     }
-
-
 
     private fun addReserve() {
         //reserve Date and time
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-SS")
         val formatted = current.format(formatter)
-
         val requestId= FirebaseAuth.getInstance().currentUser?.uid
-
         val reserve = ReservationData()
+
         reserve.ownerId = args.storeData.idOwner
         reserve.idRq = "$requestId $formatted"
         reserve.branchName = args.storeData.storeName
@@ -113,6 +108,8 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
         reserve.date = formatted
         db.collection("Reservation").document(reserve.idRq).set(reserve)
         findNavController().navigate(ItemListDialogFragmentDirections.actionItemListDialogFragmentToReservation())
+        AhjzliNotificationRepo().myNotification(MainActivity())
 
     }
+
 }
