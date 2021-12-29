@@ -34,7 +34,6 @@ class Register : Fragment() {
     private lateinit var phoneNumberAccount: TextInputEditText
     private lateinit var signUpButton: Button
     private lateinit var sharedPreferences2: SharedPreferences
-
     private val db = Firebase.firestore.collection("UserAccount")
 
     override fun onCreateView(
@@ -85,7 +84,7 @@ class Register : Fragment() {
                     if (task.isSuccessful) {
                         Toast.makeText(context, "You were registered successful", Toast.LENGTH_LONG)
                             .show()
-                        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
                         saveAccount(account)
 
                     } else {

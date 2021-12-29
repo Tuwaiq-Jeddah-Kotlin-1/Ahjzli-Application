@@ -32,7 +32,6 @@ class SignIn : Fragment() {
     private lateinit var signInButton:Button
     private lateinit var enterYourEmail:TextInputEditText
     private lateinit var enterYourPass:TextInputEditText
-
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var sharedPreferences2: SharedPreferences
     var checkBoxValue = false

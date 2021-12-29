@@ -9,7 +9,6 @@ import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.tuwaiq.useraccount.notification.AhjzliNotificationRepo
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -23,12 +22,12 @@ class MainActivity : AppCompatActivity() {
         //save and set language
         val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
         val language = sharedPreferences.getString("My_Lang", "")!!
-        setLocate(language)
+        setLocal(language)
 
 
     }
 
-    private fun setLocate(lang: String) {
+    private fun setLocal(lang: String) {
         val locale = Locale(lang)
         Locale.setDefault(locale)
         val config = Configuration()

@@ -77,8 +77,16 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
                 maxP -= enterNumber
                 addReserve()
                 upDateTheNumberOfPeople()
-            }else{
-                Toast.makeText(context,"You can't reserve more than: $maxP",Toast.LENGTH_SHORT).show()
+            }else {
+                if (maxP == 0) {
+                    Toast.makeText(context, "There is no more space!!",
+                        Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(
+                        context, "You can't reserve more than: $maxP",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
@@ -98,8 +106,8 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
 
         reserve.ownerId = args.storeData.idOwner
         reserve.idRq = "$requestId $formatted"
-        reserve.branchName = args.storeData.storeName
-        reserve.storeName = args.storeData.branchName
+        reserve.branchName = args.storeData.branchName
+        reserve.storeName = args.storeData.storeName
         reserve.maps = args.storeData.branchLocation
         reserve.numberOfTheCustomer = numberOfPeople.text.toString().toInt()
         reserve.userId = uId.toString()

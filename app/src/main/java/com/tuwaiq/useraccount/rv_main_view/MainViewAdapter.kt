@@ -2,6 +2,8 @@ package com.tuwaiq.useraccount.rv_main_view
 
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -70,10 +72,11 @@ class MainViewAdapter(var  storeFilterList: MutableList<GetStoreData>,
         holder.map = store.branchLocation
         holder.idOwner =store.idOwner
 
-       holder.maxP = store.maxPeople
+       holder.maxP = store.maxPeople/*
         holder.storeBLocation.setOnClickListener{
+            val i = Intent(Intent.CATEGORY_APP_MAPS)
             Toast.makeText(holder.itemView.context," map is ${store.branchLocation}",Toast.LENGTH_LONG).show()
-        }
+        }*/
     }
     //take the size
     override fun getItemCount(): Int = storeFilterList.size
@@ -101,11 +104,15 @@ class CustomHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnCli
         val parcelize =GetStoreData()
         parcelize.branchName = storeBName.text.toString()
         parcelize.storeName = sName.text.toString()
-        parcelize.idOwner = idOwner.toString()
+        parcelize.idOwner = idOwner
         parcelize.branchLocation =map
         parcelize.branchLocation = storeBLocation.toString()
        parcelize.maxPeople = maxP
 
+        storeBLocation.setOnClickListener {
+            val i = Intent(Intent.CATEGORY_APP_MAPS, Uri.parse("maps:$map"))
+            v?.context?.startActivity(i)
+        }
         val action: NavDirections =
                 MainInterfaceDirections.actionMainViewToItemListDialogFragment(parcelize)
            findNavController(itemView.findFragment()).navigate(action)

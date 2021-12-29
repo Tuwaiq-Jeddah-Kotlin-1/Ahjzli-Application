@@ -77,6 +77,7 @@ class Profile : Fragment() {
         }
     }
 
+/*
     fun getUserInfo() = CoroutineScope(Dispatchers.IO).launch {
         val uId =FirebaseAuth.getInstance().currentUser?.uid
         try {
@@ -108,6 +109,7 @@ class Profile : Fragment() {
             }
         }
     }
+*/
 
     private fun getSPForLogOut(){
         val editor:SharedPreferences.Editor = sharedPreferences.edit()
