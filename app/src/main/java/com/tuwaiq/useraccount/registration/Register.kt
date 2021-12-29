@@ -3,6 +3,7 @@ package com.tuwaiq.useraccount.registration
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.tuwaiq.useraccount.R
@@ -108,6 +110,7 @@ class Register : Fragment() {
         try {
             db.document("$uid").set(account)
             withContext(Dispatchers.Main) {
+                getUserInfo()
                 val action: NavDirections = RegisterDirections.actionRegisterToMainView()
                 view?.findNavController()?.navigate(action)
                 //saveSharedPreference()
@@ -117,6 +120,37 @@ class Register : Fragment() {
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
                 Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    fun getUserInfo() = CoroutineScope(Dispatchers.IO).launch {
+        val uId =FirebaseAuth.getInstance().currentUser?.uid
+        try {
+            val db = FirebaseFirestore.getInstance()
+            db.collection("UserAccount").document("$uId")
+                .get().addOnCompleteListener {
+                    if (it.result?.exists()!!) {
+                        val name = it.result!!.getString("userName")
+                        val userEmail = it.result!!.getString("emailAddress")
+                        val userPhone = it.result!!.getString("number")
+
+                        //to save the info in the sp
+
+                        val editor3:SharedPreferences.Editor = sharedPreferences2.edit()
+                        editor3.putString("spUserName",name.toString())
+                        editor3.putString("spEmail",userEmail.toString())
+                        editor3.putString("spPhoneNumber",userPhone.toString())
+                        editor3.apply()
+
+                    } else {
+                        Log.e("error \n", "errooooooorr")
+                    }
+                }
+
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+                // Toast.makeText(coroutineContext,0,0, e.message, Toast.LENGTH_LONG).show()
+                Log.e("FUNCTION createUserFirestore", "${e.message}")
             }
         }
     }

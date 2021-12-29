@@ -1,5 +1,6 @@
 package com.tuwaiq.useraccount
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -42,7 +43,7 @@ class Profile : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        getUserInfo()
+        //getUserInfo()
         return view
     }
 
@@ -87,6 +88,7 @@ class Profile : Fragment() {
                         val userEmail = it.result!!.getString("emailAddress")
                         val userPhone = it.result!!.getString("number")
 
+                        //to save the info in the sp
                         sharedPreferences2 = requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE)
                         val editor3:SharedPreferences.Editor = sharedPreferences2.edit()
                         editor3.putString("spUserName",name.toString())
@@ -106,14 +108,24 @@ class Profile : Fragment() {
             }
         }
     }
+
     private fun getSPForLogOut(){
         val editor:SharedPreferences.Editor = sharedPreferences.edit()
         sharedPreferences.getString("EMAIL","")
         sharedPreferences.getString("PASSWORD","")
         editor.clear()
         editor.apply()
+
+        val editor2:SharedPreferences.Editor = sharedPreferences2.edit()
+        sharedPreferences2.getString("spUserName"," ")
+        sharedPreferences2.getString("spEmail"," ")
+        sharedPreferences2.getString("spPhoneNumber"," ")
+        editor2.clear()
+        editor2.apply()
+
         findNavController().navigate(ProfileDirections.actionProfileToSignIn())
     }
+
 
     private fun bottomSheet() {
         val view: View = layoutInflater.inflate(R.layout.bottom_sheet, null)
@@ -123,6 +135,7 @@ class Profile : Fragment() {
 
         userNameBS.setText(userNameProfile.text.toString())
         phoneNumberBS.setText(phoneNumberProfile.text.toString())
+        val builder = BottomSheetDialog(requireView().context)
         editBS.setOnClickListener {
             editProfile()
             //save the changes in the sp
@@ -131,8 +144,9 @@ class Profile : Fragment() {
             editor3.putString("spUserName",userNameBS.text.toString())
             editor3.putString("spPhoneNumber",phoneNumberBS.text.toString())
             editor3.apply()
+            builder.dismiss()
         }
-        val builder = BottomSheetDialog(requireView()?.context)
+
         builder.setTitle("edit")
         builder.setContentView(view)
         builder.show()

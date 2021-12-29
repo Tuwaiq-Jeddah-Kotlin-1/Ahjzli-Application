@@ -3,6 +3,7 @@ package com.tuwaiq.useraccount.registration
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,10 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tuwaiq.useraccount.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class SignIn : Fragment() {
@@ -29,6 +34,7 @@ class SignIn : Fragment() {
     private lateinit var enterYourPass:TextInputEditText
 
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var sharedPreferences2: SharedPreferences
     var checkBoxValue = false
     private lateinit var rememberMe: CheckBox
 
@@ -50,6 +56,7 @@ class SignIn : Fragment() {
         //check box action
         rememberMe = view.findViewById(R.id.checkBox)
         sharedPreferences = this.requireActivity().getSharedPreferences("preference", Context.MODE_PRIVATE)
+        sharedPreferences2 = this.requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE)
         checkBoxValue = sharedPreferences.getBoolean("CHECKBOX", false)
         if (checkBoxValue) {
             findNavController().navigate(R.id.action_signIn_to_mainView)
@@ -99,10 +106,8 @@ class SignIn : Fragment() {
                 if (it.result?.exists()!!){
                     Toast.makeText(context, "Sign in successful", Toast.LENGTH_LONG)
                         .show()
-
-                    val action: NavDirections = SignInDirections.actionSignInToMainView()
-                    view?.findNavController()?.navigate(action)
-
+                    getUserInfo()
+                    findNavController().navigate(SignInDirections.actionSignInToMainView())
                     checkBox()
                 }else{
                     Toast.makeText(context, "Please make sure the values are correct", Toast.LENGTH_LONG)
@@ -112,8 +117,8 @@ class SignIn : Fragment() {
     }
 
 
+    //save check box
     private fun checkBox(){
-
         val emailPreference: String = enterYourEmail.text.toString()
         val passwordPreference: String = enterYourPass.text.toString()
         val checked: Boolean = rememberMe.isChecked
@@ -123,6 +128,39 @@ class SignIn : Fragment() {
         editor.putBoolean("CHECKBOX", checked)
         editor.apply()
     }
+
+    fun getUserInfo() = CoroutineScope(Dispatchers.IO).launch {
+        val uId =FirebaseAuth.getInstance().currentUser?.uid
+        try {
+            val db = FirebaseFirestore.getInstance()
+            db.collection("UserAccount").document("$uId")
+                .get().addOnCompleteListener {
+                    if (it.result?.exists()!!) {
+                        val name = it.result!!.getString("userName")
+                        val userEmail = it.result!!.getString("emailAddress")
+                        val userPhone = it.result!!.getString("number")
+
+                        //to save the info in the sp
+
+                        val editor3:SharedPreferences.Editor = sharedPreferences2.edit()
+                        editor3.putString("spUserName",name.toString())
+                        editor3.putString("spEmail",userEmail.toString())
+                        editor3.putString("spPhoneNumber",userPhone.toString())
+                        editor3.apply()
+
+                    } else {
+                        Log.e("error \n", "errooooooorr")
+                    }
+                }
+
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+                // Toast.makeText(coroutineContext,0,0, e.message, Toast.LENGTH_LONG).show()
+                Log.e("FUNCTION createUserFirestore", "${e.message}")
+            }
+        }
+    }
+
 }
 
 
