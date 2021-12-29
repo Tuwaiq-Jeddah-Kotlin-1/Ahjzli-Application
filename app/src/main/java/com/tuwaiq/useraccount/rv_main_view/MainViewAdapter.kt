@@ -106,7 +106,6 @@ class CustomHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnCli
         parcelize.storeName = sName.text.toString()
         parcelize.idOwner = idOwner
         parcelize.branchLocation =map
-        parcelize.branchLocation = storeBLocation.toString()
        parcelize.maxPeople = maxP
 
         storeBLocation.setOnClickListener {

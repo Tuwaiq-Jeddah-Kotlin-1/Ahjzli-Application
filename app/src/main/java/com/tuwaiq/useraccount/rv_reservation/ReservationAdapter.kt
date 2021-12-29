@@ -39,5 +39,6 @@ class ReservationHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     var branchNameReservation : TextView = itemView.findViewById(R.id.txtRestaurantBranch_reserve)
     var location : ImageView = itemView.findViewById(R.id.IVLocation_reserve)
     lateinit var loc:String
+
 }
 
