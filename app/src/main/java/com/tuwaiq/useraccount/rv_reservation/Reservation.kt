@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import com.tuwaiq.useraccount.R
-import com.tuwaiq.useraccount.rv_main_view.GetStoreData
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 
@@ -24,9 +23,6 @@ class Reservation : Fragment() {
     private lateinit var reservationRV: RecyclerView
     private lateinit var reservationAdapter: ReservationAdapter
     private lateinit var rList:MutableList<ReservationData>
-    private var enterNumber:Int = 1
-    private  var maxP:Int=0
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -60,18 +56,23 @@ class Reservation : Fragment() {
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             val position = viewHolder.layoutPosition
-            val deletedFav = rList[position]
+            val delete = rList[position]
             when(direction){
                 ItemTouchHelper.LEFT -> {
-                    deleteReservation(deletedFav)
-                    rList.remove(deletedFav)
+                    deleteReservation(delete)
+                    rList.remove(delete)
 
                     ReservationAdapter(rList).notifyItemRemoved(position)
+                    Toast.makeText(context, " ${  delete.numberOfTheCustomer}", Toast.LENGTH_SHORT).show()
+                    addNumberTheOwner(delete.ownerId,delete.numberOfTheCustomer)
                 }
                 ItemTouchHelper.RIGHT -> {
-                    deleteReservation(deletedFav)
-                    rList.remove(deletedFav)
+                    deleteReservation(delete)
+                    rList.remove(delete)
+
+                    Toast.makeText(context, " ${  delete.numberOfTheCustomer}", Toast.LENGTH_SHORT).show()
                     ReservationAdapter(rList).notifyItemRemoved(position)
+                    addNumberTheOwner(delete.ownerId,delete.numberOfTheCustomer)
                 }
             }
         }
@@ -86,6 +87,18 @@ class Reservation : Fragment() {
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
         }
     }
+
+    private fun addNumberTheOwner(ownerId:String, numberOfTheCustomer:Int) {
+        db.collection("StoreOwner").document(ownerId)
+            .get().addOnCompleteListener {
+                if (it.result?.exists()!!) {
+                    val maxP = it.result!!.get("maxPeople").toString().toInt()
+                    db.collection("StoreOwner").document(ownerId)
+                        .update("maxPeople", numberOfTheCustomer + maxP)
+                }
+            }
+    }
+
     private fun deleteReservation(delete:ReservationData){
         db.collection("Reservation").document(delete.idRq).delete()
     }

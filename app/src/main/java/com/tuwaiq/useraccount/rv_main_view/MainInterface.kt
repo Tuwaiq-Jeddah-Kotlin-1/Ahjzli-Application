@@ -43,12 +43,12 @@ class MainInterface : Fragment() {
         rv.setHasFixedSize(true)
 
         getTheDataList()
+
         //search view
         search.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 myAdapter.filter.filter(newText)
                 return false
