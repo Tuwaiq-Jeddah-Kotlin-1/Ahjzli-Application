@@ -34,4 +34,7 @@
     <string name="about_us">معلومات عن البرنامج</string>
     <string name="About">أحجزلي يحل مشكلة الازدحام أمام المحلات وخاصة المطاعم والمقاهي من خلال الحجز في التطبيق.</string>
     <string name="version">الإصدار</string>
-    <string name="_1_0_0">1.0.0</string></resources>
+    <string name="_1_0_0">1.0.0</string>
+    <string name="user_name_text">User Name:</string>
+    <string name="how_many_person">How many person?</string>
+</resources>

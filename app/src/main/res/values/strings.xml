@@ -34,4 +34,8 @@
     <string name="About">Ahjzli solves the problem of congestion in front of shops, especially restaurants and cafes, by reserved in the application.</string>
     <string name="version">Version</string>
     <string name="_1_0_0">1.0.0</string>
+    <string name="user_name_text">User Name:</string>
+    <string name="email_text">Email:</string>
+    <string name="phone_number_text">Phone Number:</string>
+    <string name="how_many_person">How many person?</string>
 </resources>

@@ -20,16 +20,30 @@
         android:layout_marginVertical="10dp"
         android:padding="10dp">
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/store_name"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+        <TextView
             android:id="@+id/txt_storeName_reservation"
             android:layout_width="301dp"
             android:layout_margin="10dp"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:layout_gravity="center"
-            android:textColorHint="@color/green"
+            android:textColorHint="@color/blue"
             android:hint="@string/store_name"
-            android:textColor="@color/green"
+            android:textColor="@color/blue"
             android:textSize="25sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/branch_name"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/txt_branchName_reservation"
@@ -38,11 +52,17 @@
             android:layout_margin="10dp"
             android:background="@color/white"
             android:layout_gravity="center"
-            android:textColorHint="@color/green"
+            android:textColorHint="@color/blue"
             android:hint="@string/branch_name"
-            android:textColor="@color/green"
+            android:textColor="@color/blue"
             android:textSize="25sp" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/how_many_person"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
         <EditText
             android:id="@+id/txtNumberOfPeople"
             android:layout_width="301dp"
@@ -51,7 +71,7 @@
             android:background="@color/white"
             android:inputType="number"
             android:text="1"
-            android:textColor="@color/green"
+            android:textColor="@color/blue"
             android:layout_margin="10dp"
             android:textSize="25sp" />
 
@@ -61,8 +81,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
             android:background="@drawable/btn_shape_reservation"
-            android:backgroundTint="@color/green"
+            android:backgroundTint="@color/blue"
             android:backgroundTintMode="src_in"
             android:text="@string/reserve"
             android:textSize="25sp"

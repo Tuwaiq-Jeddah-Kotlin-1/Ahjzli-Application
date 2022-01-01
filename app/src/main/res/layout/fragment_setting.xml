@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background_img"
+    android:background="@color/blue"
     tools:context=".Setting">
 
     <TextView
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/settings"
-                android:textColor="@color/green"
+                android:textColor="@color/blue"
                 android:textSize="50sp"
                 android:textStyle="bold" />
 
@@ -53,7 +53,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:text="@string/dark_mode"
-                android:textColor="@color/green"
+                android:textColor="@color/blue"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
@@ -65,7 +65,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:text="@string/language"
-                android:textColor="@color/green"
+                android:textColor="@color/blue"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -83,7 +83,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
                 android:text="@string/about_us"
-                android:textColor="@color/green"
+                android:textColor="@color/blue"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -103,7 +103,7 @@
                 android:layout_marginHorizontal="40dp"
                 android:layout_marginTop="35dp"
                 android:text="@string/version"
-                android:textColor="@color/green"
+                android:textColor="@color/blue"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -114,7 +114,7 @@
                 android:layout_marginHorizontal="40dp"
                 android:layout_marginBottom="80dp"
                 android:text="@string/_1_0_0"
-                android:textColor="@color/green"
+                android:textColor="@color/blue"
                 android:textSize="20sp" />
         </LinearLayout>
     </FrameLayout>
