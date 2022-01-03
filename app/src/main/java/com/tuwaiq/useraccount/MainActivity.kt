@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavController()
 
+
         //save and set language
         val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
         val language = sharedPreferences.getString("My_Lang", "")!!
@@ -27,6 +28,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+
+    }
     private fun setLocal(lang: String) {
         val locale = Locale(lang)
         Locale.setDefault(locale)

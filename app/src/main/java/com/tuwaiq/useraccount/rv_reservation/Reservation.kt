@@ -43,6 +43,7 @@ class Reservation : Fragment() {
         taskTouchHelper.attachToRecyclerView(reservationRV)
 
         getTheReservationList()
+        deleteReservation()
     }
 
     private var simpleCallback= object : ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT.or(ItemTouchHelper.RIGHT)){
@@ -59,7 +60,7 @@ class Reservation : Fragment() {
             val delete = rList[position]
             when(direction){
                 ItemTouchHelper.LEFT -> {
-                    deleteReservation(delete)
+                    db.collection("Reservation").document(delete.idRq).delete()
                     rList.remove(delete)
 
                     ReservationAdapter(rList).notifyItemRemoved(position)
@@ -67,7 +68,7 @@ class Reservation : Fragment() {
                     addNumberTheOwner(delete.ownerId,delete.numberOfTheCustomer)
                 }
                 ItemTouchHelper.RIGHT -> {
-                    deleteReservation(delete)
+                    db.collection("Reservation").document(delete.idRq).delete()
                     rList.remove(delete)
 
                     Toast.makeText(context, " ${  delete.numberOfTheCustomer}", Toast.LENGTH_SHORT).show()
@@ -99,8 +100,28 @@ class Reservation : Fragment() {
             }
     }
 
-    private fun deleteReservation(delete:ReservationData){
-        db.collection("Reservation").document(delete.idRq).delete()
+    private fun deleteReservation(){
+        db = FirebaseFirestore.getInstance()
+        val id =FirebaseAuth.getInstance().currentUser?.uid
+        db.collection("Reservation").whereEqualTo("userId",id)
+            .addSnapshotListener(object : EventListener<QuerySnapshot> {
+
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                if (error != null) {
+                    Log.e("Firestore Add", error.message.toString())
+                    return
+                }
+                for (dc: DocumentChange in value?.documentChanges!!) {
+                    if (dc.type == DocumentChange.Type.REMOVED) {
+
+                        rList.remove(dc.document.toObject(ReservationData::class.java))
+                        Log.d("delete",rList.toString())
+                    }
+                }
+                reservationAdapter.notifyDataSetChanged()
+            }
+        })
     }
 
     private fun getTheReservationList() {

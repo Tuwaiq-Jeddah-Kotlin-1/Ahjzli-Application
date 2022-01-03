@@ -146,6 +146,8 @@ class Profile : Fragment() {
             editor3.putString("spUserName",userNameBS.text.toString())
             editor3.putString("spPhoneNumber",phoneNumberBS.text.toString())
             editor3.apply()
+            userNameProfile.text= userNameBS.text.toString()
+            phoneNumberProfile.text= phoneNumberBS.text.toString()
             builder.dismiss()
         }
 
