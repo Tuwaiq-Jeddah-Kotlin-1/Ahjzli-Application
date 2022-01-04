@@ -82,10 +82,11 @@
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="40dp"
-            android:background="@drawable/btn_shape_reservation"
+            android:background="@drawable/btn_shape"
             android:backgroundTint="@color/blue"
             android:backgroundTintMode="src_in"
             android:text="@string/reserve"
+            android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold"  />
     </LinearLayout>

@@ -9,12 +9,6 @@
     android:gravity="center"
     tools:context=".Splash">
 
-        <!--<pl.droidsonroids.gif.GifImageView
-            android:id="@+id/gif_logo"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="100dp"
-            android:src="@drawable/my_logo" />-->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
         android:layout_width="200dp"

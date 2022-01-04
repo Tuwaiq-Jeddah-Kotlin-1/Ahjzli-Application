@@ -56,6 +56,7 @@ class MainInterface : Fragment() {
 
         })
     }
+
     //check the state if true
     private fun getTheDataList() {
         db = FirebaseFirestore.getInstance()

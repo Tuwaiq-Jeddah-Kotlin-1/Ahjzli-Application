@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.navigation.NavDeepLinkBuilder
 import com.tuwaiq.useraccount.MainActivity
 import com.tuwaiq.useraccount.R
 
@@ -19,14 +20,19 @@ class NotificationHelper(val context: Context) {
         createNotificationChannel()
         val intent= Intent(context, MainActivity::class.java).apply {
             flags= Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            this.putExtra("titleTest","messageTest")
         }
-        val pendingIntent = PendingIntent.getActivity(context,0,intent,0)
+
+        val pendingIntent = PendingIntent.getActivity(context,0,intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
+
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.my_logo)
             .setContentTitle(title)
             .setContentText(message)
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
             .build()
         NotificationManagerCompat.from(context).notify(NOTIFICATION_ID,notification)
 
