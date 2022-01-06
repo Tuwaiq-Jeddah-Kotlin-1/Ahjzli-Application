@@ -2,6 +2,7 @@ package com.tuwaiq.useraccount
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 
 class Splash : Fragment() {
@@ -20,8 +22,7 @@ class Splash : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_splash, container, false)
-/*        val main =  requireActivity() as MainActivity
-        main.settings()*/
+
         return view
     }
 
@@ -34,7 +35,7 @@ class Splash : Fragment() {
         logoTextView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.text_logo))
         Handler().postDelayed({
             val action: NavDirections = SplashDirections.actionSplashToSignIn()
-            view.findNavController().navigate(action)
+            findNavController().navigate(action)
         }, 5000)
     }
 }

@@ -1,7 +1,6 @@
 package com.tuwaiq.useraccount.rv_main_view
 
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
@@ -57,8 +56,6 @@ class MainViewAdapter(var  storeFilterList: MutableList<GetStoreData>,
         }
     }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomHolder {
         // inflate layout
         val view = LayoutInflater.from(parent.context).inflate(R.layout.restaurant_rv_list,parent,false)
@@ -71,19 +68,14 @@ class MainViewAdapter(var  storeFilterList: MutableList<GetStoreData>,
         holder.storeBName.text = store.branchName
         holder.map = store.branchLocation
         holder.idOwner =store.idOwner
+       holder.maxP = store.maxPeople
 
-       holder.maxP = store.maxPeople/*
-        holder.storeBLocation.setOnClickListener{
-            val i = Intent(Intent.CATEGORY_APP_MAPS)
-            Toast.makeText(holder.itemView.context," map is ${store.branchLocation}",Toast.LENGTH_LONG).show()
-        }*/
     }
     //take the size
     override fun getItemCount(): Int = storeFilterList.size
 
 
 }
-
 
 //init the values
 class CustomHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClickListener {
@@ -108,10 +100,15 @@ class CustomHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnCli
         parcelize.branchLocation =map
        parcelize.maxPeople = maxP
 
-        storeBLocation.setOnClickListener {
-            val i = Intent(Intent.CATEGORY_APP_MAPS, Uri.parse("maps:$map"))
-            v?.context?.startActivity(i)
+        storeBLocation.setOnClickListener{
+            Toast.makeText(this.itemView.context," map is ${map}",Toast.LENGTH_LONG).show()
+            val gmmIntentUri = Uri.parse("google.navigation:q=$map")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            this.itemView.context.startActivity(mapIntent)
+
         }
+
         val action: NavDirections =
                 MainInterfaceDirections.actionMainViewToItemListDialogFragment(parcelize)
            findNavController(itemView.findFragment()).navigate(action)

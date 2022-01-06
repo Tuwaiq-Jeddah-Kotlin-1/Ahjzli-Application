@@ -3,10 +3,10 @@ package com.tuwaiq.useraccount
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
@@ -22,15 +22,28 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("CommitTransaction")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
+        val mode = resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)
+        val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
+        if (sharedPreferences.getBoolean("darkMode",false)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            if (mode == Configuration.UI_MODE_NIGHT_YES) {
+                loadView(sharedPreferences)
+            }
+        }else{
+            loadView(sharedPreferences)
+        }
+    }
+
+    private fun loadView(sharedPreferences: SharedPreferences) {
+        setContentView(R.layout.activity_main)
+        val language = sharedPreferences.getString("My_Lang", "")!!
+        setLocal(language)
         supportActionBar?.hide()
         navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
-
         bottomNavController()
-
     }
 
 /*    override fun onBackPressed() {
@@ -74,15 +87,5 @@ class MainActivity : AppCompatActivity() {
         val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
         editor.putString("My_Lang", lang)
         editor.apply()
-    }
-    fun settings(){
-        val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
-        //val darkMode = sharedPreferences.getBoolean("darkMode",false)
-        if (sharedPreferences.getBoolean("darkMode",false)){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
-        //save and set language
-        val language = sharedPreferences.getString("My_Lang", "")!!
-        setLocal(language)
     }
 }

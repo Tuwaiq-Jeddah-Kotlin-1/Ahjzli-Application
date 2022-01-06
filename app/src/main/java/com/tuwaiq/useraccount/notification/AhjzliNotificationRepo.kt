@@ -4,8 +4,7 @@ import androidx.work.*
 import com.tuwaiq.useraccount.MainActivity
 
 class AhjzliNotificationRepo () {
-    private val notification = "You have 1 hour for you'r reservation"
-    fun myNotification(mainActivity: MainActivity){
+    fun myNotification(mainActivity: MainActivity,notification:String){
         val myWorkRequest= OneTimeWorkRequestBuilder<AhjzliWorker>()
             .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
             .setInputData(workDataOf(

@@ -116,7 +116,7 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
         reserve.date = formatted
         db.collection("Reservation").document(reserve.idRq).set(reserve)
         findNavController().navigate(ItemListDialogFragmentDirections.actionItemListDialogFragmentToReservation())
-        AhjzliNotificationRepo().myNotification(MainActivity())
+
 
     }
 
