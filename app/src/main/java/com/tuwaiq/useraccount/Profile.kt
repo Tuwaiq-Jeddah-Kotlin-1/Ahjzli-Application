@@ -77,40 +77,6 @@ class Profile : Fragment() {
         }
     }
 
-/*
-    fun getUserInfo() = CoroutineScope(Dispatchers.IO).launch {
-        val uId =FirebaseAuth.getInstance().currentUser?.uid
-        try {
-            val db = FirebaseFirestore.getInstance()
-            db.collection("UserAccount").document("$uId")
-                .get().addOnCompleteListener {
-                    if (it.result?.exists()!!) {
-                        val name = it.result!!.getString("userName")
-                        val userEmail = it.result!!.getString("emailAddress")
-                        val userPhone = it.result!!.getString("number")
-
-                        //to save the info in the sp
-                        sharedPreferences2 = requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE)
-                        val editor3:SharedPreferences.Editor = sharedPreferences2.edit()
-                        editor3.putString("spUserName",name.toString())
-                        editor3.putString("spEmail",userEmail.toString())
-                        editor3.putString("spPhoneNumber",userPhone.toString())
-                        editor3.apply()
-
-                    } else {
-                        Log.e("error \n", "errooooooorr")
-                    }
-                }
-
-        } catch (e: Exception) {
-            withContext(Dispatchers.Main) {
-                // Toast.makeText(coroutineContext,0,0, e.message, Toast.LENGTH_LONG).show()
-                Log.e("FUNCTION createUserFirestore", "${e.message}")
-            }
-        }
-    }
-*/
-
     private fun getSPForLogOut(){
         val editor:SharedPreferences.Editor = sharedPreferences.edit()
         sharedPreferences.getString("EMAIL","")

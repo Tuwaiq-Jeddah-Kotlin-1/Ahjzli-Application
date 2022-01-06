@@ -20,12 +20,15 @@ class Splash : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_splash, container, false)
+/*        val main =  requireActivity() as MainActivity
+        main.settings()*/
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         lottie =view.findViewById(R.id.lottieAnimationView)
         logoTextView = view.findViewById(R.id.txt_logo)
+
 
         lottie.startAnimation(AnimationUtils.loadAnimation(context, R.anim.logo_img))
         logoTextView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.text_logo))

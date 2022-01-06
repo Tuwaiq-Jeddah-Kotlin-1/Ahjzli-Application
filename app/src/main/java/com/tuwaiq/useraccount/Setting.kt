@@ -12,6 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Switch
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.core.app.ActivityCompat.recreate
 import java.util.*
 
@@ -20,6 +23,7 @@ class Setting : Fragment() {
     private lateinit var languageTextView:TextView
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private lateinit var switch: Switch
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -31,10 +35,18 @@ class Setting : Fragment() {
 
         languageTextView = view.findViewById(R.id.language)
         switch = view.findViewById(R.id.swMode)
+        val editor = this.requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        switch.isChecked = editor.getBoolean("darkMode",false)
 
-        switch.setOnCheckedChangeListener{_, isChecked ->
-            val mode: Boolean = isChecked
-
+        switch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
+            }
+            editor.edit()
+            .putBoolean("darkMode",isChecked)
+                .apply()
         }
 
         languageTextView.setOnClickListener {

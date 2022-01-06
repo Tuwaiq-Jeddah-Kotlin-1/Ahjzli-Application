@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".bottomsheet_reservation.ItemListDialogFragment">
     <ImageView
         android:layout_width="wrap_content"
