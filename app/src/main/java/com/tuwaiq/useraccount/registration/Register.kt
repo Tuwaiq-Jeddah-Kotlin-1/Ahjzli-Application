@@ -78,24 +78,33 @@ class Register : Fragment() {
         val account = MyAccountData(userName, email, phoneNumber)
 
         if (userName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && phoneNumber.isNotEmpty()) {
-            //save to the Authentication
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(context, "You were registered successful", Toast.LENGTH_LONG)
-                            .show()
+            if (phoneNumber.toInt() == 10) {
+                //save to the Authentication
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(
+                                context,
+                                "You were registered successful",
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
 
-                        saveAccount(account)
+                            saveAccount(account)
+                        } else {
+                            // if the registration is not successful then show error massage
+                            Toast.makeText(
+                                context,
+                                "Please make sure the values are correct, or fill the fields",
+                                Toast.LENGTH_LONG
+                            ).show()
 
-                    } else {
-                        // if the registration is not successful then show error massage
-                        Toast.makeText(
-                            context, "Please make sure the values are correct, or fill the fields",
-                            Toast.LENGTH_LONG
-                        ).show()
-
+                        }
                     }
-                }
+            }else{
+                Toast.makeText(context, "please enter a saudi phone number, 05XXXXXXXX", Toast.LENGTH_LONG)
+                    .show()
+            }
         } else {
             Toast.makeText(context, "please enter all fields", Toast.LENGTH_LONG)
                 .show()

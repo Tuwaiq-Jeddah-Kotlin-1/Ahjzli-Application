@@ -144,6 +144,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="25dp"
                     android:background="@drawable/btn_shape"
+                    android:textColor="@color/white"
                     android:text="@string/sign_up"
                     android:textSize="25sp"
                     android:textStyle="bold" />
