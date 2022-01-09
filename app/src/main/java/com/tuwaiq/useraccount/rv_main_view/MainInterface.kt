@@ -76,9 +76,9 @@ class MainInterface : Fragment() {
             .addSnapshotListener(object :EventListener<QuerySnapshot>{
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                    if (error != null) {
-                        Log.e("Firestore Add", error.message.toString())
-                        return
+                    if (value != null) {
+                        myAdapter = MainViewAdapter(value.toObjects(GetStoreData::class.java))
+                        rv.adapter = myAdapter
                     }
                     for (dc: DocumentChange in value?.documentChanges!!) {
                         if (dc.type == DocumentChange.Type.ADDED) {

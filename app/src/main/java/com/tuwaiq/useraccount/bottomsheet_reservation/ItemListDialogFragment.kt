@@ -71,22 +71,38 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
             }
 
         reservationButton.setOnClickListener {
-            maxP=args.storeData.maxPeople
-            enterNumber = numberOfPeople.text.toString().toInt()
-            if ( enterNumber <= maxP){
-                maxP -= enterNumber
-                addReserve()
-                upDateTheNumberOfPeople()
-            }else {
-                if (maxP == 0) {
-                    Toast.makeText(context, "There is no more space!!",
-                        Toast.LENGTH_SHORT).show()
+            maxP = args.storeData.maxPeople
+            if (numberOfPeople.text.isNotEmpty()) {
+                enterNumber = numberOfPeople.text.toString().toInt()
+                if (enterNumber > 0 && numberOfPeople.text.isNotEmpty()) {
+                    if (enterNumber <= maxP) {
+                        maxP -= enterNumber
+                        addReserve()
+                        upDateTheNumberOfPeople()
+                    } else {
+                        if (maxP == 0) {
+                            Toast.makeText(
+                                context, "There is no more space!!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(
+                                context, "You can't reserve more than: $maxP",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
                 } else {
                     Toast.makeText(
-                        context, "You can't reserve more than: $maxP",
+                        context, "please enter number bigger then 0 ",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+            }else{
+                Toast.makeText(
+                    context, "enter a number ",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

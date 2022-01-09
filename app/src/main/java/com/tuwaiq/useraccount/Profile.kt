@@ -26,17 +26,18 @@ import kotlinx.coroutines.withContext
 
 
 class Profile : Fragment() {
-    private lateinit var userNameProfile:TextView
-    private lateinit var emailProfile:TextView
-    private lateinit var phoneNumberProfile:TextView
-    private lateinit var editButton:Button
-    private lateinit var logOut:TextView
+    private lateinit var userNameProfile: TextView
+    private lateinit var emailProfile: TextView
+    private lateinit var phoneNumberProfile: TextView
+    private lateinit var editButton: Button
+    private lateinit var logOut: TextView
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var sharedPreferences2: SharedPreferences
+
     //bottom sheet
-    private lateinit var userNameBS:EditText
-    private lateinit var phoneNumberBS:EditText
-    private lateinit var editBS:Button
+    private lateinit var userNameBS: EditText
+    private lateinit var phoneNumberBS: EditText
+    private lateinit var editBS: Button
 
 
     override fun onCreateView(
@@ -50,23 +51,25 @@ class Profile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         //shared preference
-        sharedPreferences = this.requireActivity().getSharedPreferences("preference", Context.MODE_PRIVATE)
+        sharedPreferences =
+            this.requireActivity().getSharedPreferences("preference", Context.MODE_PRIVATE)
 
 
-        userNameProfile= view.findViewById(R.id.txt_userName_profile)
-        emailProfile= view.findViewById(R.id.txt_email_Profile)
-        phoneNumberProfile= view.findViewById(R.id.txt_Phone_profile)
+        userNameProfile = view.findViewById(R.id.txt_userName_profile)
+        emailProfile = view.findViewById(R.id.txt_email_Profile)
+        phoneNumberProfile = view.findViewById(R.id.txt_Phone_profile)
         editButton = view.findViewById(R.id.btnEdit)
         logOut = view.findViewById(R.id.logOut)
 
         //get the info from the sp
-        sharedPreferences2 = this.requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE)
-        val sp1 = sharedPreferences2.getString("spUserName"," ")
-        val sp2 = sharedPreferences2.getString("spEmail"," ")
-        val sp3 = sharedPreferences2.getString("spPhoneNumber"," ")
-        userNameProfile.text= sp1
-        emailProfile.text= sp2
-        phoneNumberProfile.text= sp3
+        sharedPreferences2 =
+            this.requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE)
+        val sp1 = sharedPreferences2.getString("spUserName", " ")
+        val sp2 = sharedPreferences2.getString("spEmail", " ")
+        val sp3 = sharedPreferences2.getString("spPhoneNumber", " ")
+        userNameProfile.text = sp1
+        emailProfile.text = sp2
+        phoneNumberProfile.text = sp3
 
 
         editButton.setOnClickListener {
@@ -77,17 +80,17 @@ class Profile : Fragment() {
         }
     }
 
-    private fun getSPForLogOut(){
-        val editor:SharedPreferences.Editor = sharedPreferences.edit()
-        sharedPreferences.getString("EMAIL","")
-        sharedPreferences.getString("PASSWORD","")
+    private fun getSPForLogOut() {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        sharedPreferences.getString("EMAIL", "")
+        sharedPreferences.getString("PASSWORD", "")
         editor.clear()
         editor.apply()
 
-        val editor2:SharedPreferences.Editor = sharedPreferences2.edit()
-        sharedPreferences2.getString("spUserName"," ")
-        sharedPreferences2.getString("spEmail"," ")
-        sharedPreferences2.getString("spPhoneNumber"," ")
+        val editor2: SharedPreferences.Editor = sharedPreferences2.edit()
+        sharedPreferences2.getString("spUserName", " ")
+        sharedPreferences2.getString("spEmail", " ")
+        sharedPreferences2.getString("spPhoneNumber", " ")
         editor2.clear()
         editor2.apply()
 
@@ -105,16 +108,31 @@ class Profile : Fragment() {
         phoneNumberBS.setText(phoneNumberProfile.text.toString())
         val builder = BottomSheetDialog(requireView().context)
         editBS.setOnClickListener {
-            editProfile()
-            //save the changes in the sp
-            sharedPreferences2 = requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE)
-            val editor3:SharedPreferences.Editor = sharedPreferences2.edit()
-            editor3.putString("spUserName",userNameBS.text.toString())
-            editor3.putString("spPhoneNumber",phoneNumberBS.text.toString())
-            editor3.apply()
-            userNameProfile.text= userNameBS.text.toString()
-            phoneNumberProfile.text= phoneNumberBS.text.toString()
-            builder.dismiss()
+            if (userNameBS.text.isNotEmpty() && phoneNumberBS.text.isNotEmpty()) {
+                if (phoneNumberBS.text.length == 10) {
+                    editProfile()
+                    //save the changes in the sp
+                    sharedPreferences2 =
+                        requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE)
+                    val editor3: SharedPreferences.Editor = sharedPreferences2.edit()
+                    editor3.putString("spUserName", userNameBS.text.toString())
+                    editor3.putString("spPhoneNumber", phoneNumberBS.text.toString())
+                    editor3.apply()
+                    userNameProfile.text = userNameBS.text.toString()
+                    phoneNumberProfile.text = phoneNumberBS.text.toString()
+                    builder.dismiss()
+                } else {
+                    Toast.makeText(
+                        context, "Phone number must be 10 numbers",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } else {
+                Toast.makeText(
+                    context, "fill the blanks",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         builder.setTitle("edit")
@@ -122,12 +140,12 @@ class Profile : Fragment() {
         builder.show()
     }
 
-    private fun editProfile(){
+    private fun editProfile() {
         val uId = FirebaseAuth.getInstance().currentUser?.uid
         val upDateUserData = Firebase.firestore.collection("UserAccount")
         upDateUserData.document(uId.toString()).update("userName", userNameBS.text.toString())
         upDateUserData.document(uId.toString()).update("number", phoneNumberBS.text.toString())
-        Toast.makeText(context,"edit is successful",Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "edit is successful", Toast.LENGTH_LONG).show()
 
     }
 }
