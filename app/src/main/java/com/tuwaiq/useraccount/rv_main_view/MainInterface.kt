@@ -1,6 +1,8 @@
 package com.tuwaiq.useraccount.rv_main_view
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -33,7 +35,8 @@ class MainInterface : Fragment() {
     private lateinit var db:FirebaseFirestore
     private lateinit var search:SearchView
     private lateinit var rList:MutableList<GetStoreData>
-    private lateinit var storeName:DocumentChange
+    private lateinit var shared: SharedPreferences
+    private lateinit var editor3: SharedPreferences.Editor
 
 
     override fun onCreateView(
@@ -43,6 +46,8 @@ class MainInterface : Fragment() {
         return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        shared = this.requireActivity().getSharedPreferences(
+            "storeCount", Context.MODE_PRIVATE)
         search = view.findViewById(R.id.searchView)
         rv = view.findViewById(R.id.storeRV)
         rv.layoutManager = LinearLayoutManager(this.context)
@@ -71,16 +76,40 @@ class MainInterface : Fragment() {
             .addSnapshotListener(object :EventListener<QuerySnapshot>{
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                        if (value != null) {
-                            value.documents.forEach {
-
-                                Log.e("getTheDataList", "${it.data?.get("storeName")}")
-                                AhjzliNotificationRepo().myNotification(MainActivity(),"${it.data!!.get("storeName")}")
-                            }
-                            myAdapter = MainViewAdapter(value.toObjects(GetStoreData::class.java))
+                    if (error != null) {
+                        Log.e("Firestore Add", error.message.toString())
+                        return
+                    }
+                    for (dc: DocumentChange in value?.documentChanges!!) {
+                        if (dc.type == DocumentChange.Type.ADDED) {
+                            rList.add(dc.document.toObject(GetStoreData::class.java))
                             rv.adapter = myAdapter
+                            val count = rList.size
+                            val sp = shared.getInt("count",9)
+                            if (sp < count){
+                                countOfTheList(count)
+                                val name = dc.document.data.get("storeName")
+                                AhjzliNotificationRepo().myNotification(MainActivity(),"$name added, reserved now!!")
+                            }
+
+                        }else{
+                            rList.remove(dc.document.toObject(GetStoreData::class.java))
+                            rv.adapter = myAdapter
+                            val updateCount = rList.size
+                            editor3 =shared.edit()
+                            editor3.putInt("count",updateCount)
+                                .apply()
+
                         }
+                    }
+                    myAdapter.notifyDataSetChanged()
                 }
             })
+    }
+    fun countOfTheList(count:Int){
+
+        editor3 =shared.edit()
+        editor3.putInt("count",count)
+            .apply()
     }
 }
