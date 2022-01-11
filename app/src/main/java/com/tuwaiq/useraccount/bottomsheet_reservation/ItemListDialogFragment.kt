@@ -1,5 +1,6 @@
 package com.tuwaiq.useraccount.bottomsheet_reservation
 
+import android.graphics.Color
 import android.os.Bundle
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.work.OneTimeWorkRequestBuilder
@@ -33,6 +35,7 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
     private lateinit var sName: TextView
     private lateinit var bName: TextView
     private lateinit var numberOfPeople: EditText
+    private lateinit var maxCapacity:TextView
     private lateinit var reservationButton: Button
     private var db = FirebaseFirestore.getInstance()
     private lateinit var name: String
@@ -55,6 +58,14 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
         bName = view.findViewById(R.id.txt_branchName_reservation)
         numberOfPeople = view.findViewById(R.id.txtNumberOfPeople)
         reservationButton = view.findViewById(R.id.btnReservation)
+        maxCapacity = view.findViewById(R.id.max_capacity)
+
+        maxP = args.storeData.maxPeople
+        if ( maxP == 0){
+            numberOfPeople.isEnabled = false
+            numberOfPeople.setText("0")
+        }
+        maxCapacity.text = maxP.toString()
 
         //reserved the data from the rv
         sName.setText(args.storeData.storeName)
@@ -69,9 +80,22 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
                     phone = it.result!!.getString("number").toString()
                 }
             }
+        numberOfPeople.addTextChangedListener { capacity ->
+            if (capacity.toString().isNotBlank() && capacity.toString().toIntOrNull() == null){
+                numberOfPeople.setText(capacity?.substring(0,capacity.length -1))
+            }
+            if (capacity.toString().toIntOrNull() != null) {
+                if (capacity.toString().toInt() > maxP) {
+                    numberOfPeople.setText(maxP.toString())
+                }else if (capacity.toString().toInt() < 1){
+                    numberOfPeople.setText("1")
+                }
+            }
+
+        }
 
         reservationButton.setOnClickListener {
-            maxP = args.storeData.maxPeople
+
             if (numberOfPeople.text.isNotEmpty()) {
                 enterNumber = numberOfPeople.text.toString().toInt()
                 if (enterNumber > 0 && numberOfPeople.text.isNotEmpty()) {

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue"
+    android:background="@color/dark_blue"
     tools:context=".registration.SignIn">
 
     <TextView
@@ -48,48 +48,60 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/sign_in"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/dark_blue"
                     android:textSize="50sp"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="hint" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
+                    android:layout_gravity="center"
                     android:gravity="center"
-                    android:textColorHint="@color/blue"
+                    android:textColorHint="@color/dark_blue"
                     app:startIconDrawable="@drawable/ic_email"
-                    app:startIconTint="@color/blue">
+                    app:startIconTint="@color/dark_blue">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_email_sign_in"
                         android:layout_width="301dp"
                         android:layout_height="match_parent"
-                        android:background="@color/light_blue"
+                        android:background="@color/light_silver"
                         android:hint="@string/email"
                         android:inputType="textEmailAddress"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/dark_blue"
                         android:textSize="25sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:layout_gravity="center"
                     android:gravity="center"
-                    android:textColorHint="@color/blue"
+                    android:textColorHint="@color/dark_blue"
                     app:passwordToggleEnabled="true"
                     app:startIconDrawable="@drawable/ic_lock"
-                    app:startIconTint="@color/blue">
+                    app:startIconTint="@color/dark_blue">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_password_sign_in"
                         android:layout_width="301dp"
                         android:layout_height="match_parent"
-                        android:background="@color/light_blue"
+                        android:background="@color/light_silver"
                         android:hint="@string/password"
                         android:inputType="textPassword"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/dark_blue"
                         android:textSize="25sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -106,7 +118,7 @@
                         android:layout_marginStart="54dp"
                         android:minHeight="48dp"
                         android:text="@string/remember_me"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/dark_blue"
                         android:textSize="18sp" />
 
                     <TextView
@@ -124,7 +136,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="17dp"
                         android:text="@string/password_with_q_mark"
-                        android:textColor="@color/blue" />
+                        android:textColor="@color/dark_blue" />
 
                 </LinearLayout>
 
@@ -161,7 +173,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="3dp"
                         android:text="@string/account"
-                        android:textColor="@color/blue" />
+                        android:textColor="@color/dark_blue" />
                 </LinearLayout>
 
             </LinearLayout>

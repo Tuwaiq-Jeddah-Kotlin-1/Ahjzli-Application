@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
@@ -20,7 +21,7 @@ import java.util.*
 
 
 class Setting : Fragment() {
-    private lateinit var languageTextView:TextView
+    private lateinit var languageTextView:ImageView
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private lateinit var switch: Switch
 
@@ -56,14 +57,17 @@ class Setting : Fragment() {
 
     }
     //show change language
+    @SuppressLint("SetTextI18n")
     private fun showChangeLanguage(){
         val languageList = arrayOf("English","العربية")
         val mBuilder = AlertDialog.Builder(this.context)
-        mBuilder.setTitle("Chose Language")
+        mBuilder.setTitle(getString(R.string.chose_language))
         mBuilder.setSingleChoiceItems(languageList,-1){dialog, which ->
             if (which == 0) {
+//                languageTextView.text = "English"
                 setLocate("en")
             }else if (which == 1){
+//                languageTextView.text = "العربية"
                 setLocate("ar")
             }
             recreate(context as Activity)

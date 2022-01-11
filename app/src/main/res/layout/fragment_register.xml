@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue"
+    android:background="@color/dark_blue"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".registration.Register">
 
@@ -37,7 +37,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_gravity="center|top"
                 android:layout_marginTop="50dp"
                 android:orientation="vertical">
@@ -47,93 +47,97 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/sign_up"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/dark_blue"
                     android:textSize="50sp"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout4"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
                     android:gravity="center"
-                    android:textColorHint="@color/blue"
+                    android:textColorHint="@color/dark_blue"
                     app:startIconDrawable="@drawable/ic_person"
-                    app:startIconTint="@color/blue">
+                    app:startIconTint="@color/dark_blue">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_userName_sign_up"
                         android:layout_width="301dp"
                         android:layout_height="wrap_content"
-                        android:background="@color/light_blue"
+                        android:background="@color/light_silver"
                         android:hint="@string/user_name"
                         android:inputType="textPersonName"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/dark_blue"
                         android:textSize="25sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
                     android:gravity="center"
-                    android:textColorHint="@color/blue"
+                    android:textColorHint="@color/dark_blue"
                     app:startIconDrawable="@drawable/ic_email"
-                    app:startIconTint="@color/blue">
+                    app:startIconTint="@color/dark_blue">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_email_sign_up"
                         android:layout_width="301dp"
                         android:layout_height="match_parent"
-                        android:background="@color/light_blue"
+                        android:background="@color/light_silver"
                         android:hint="@string/email"
                         android:inputType="textEmailAddress"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/dark_blue"
                         android:textSize="25sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
                     android:gravity="center"
-                    android:textColorHint="@color/blue"
+                    android:textColorHint="@color/dark_blue"
                     app:passwordToggleEnabled="true"
                     app:startIconDrawable="@drawable/ic_lock"
-                    app:startIconTint="@color/blue">
+                    app:startIconTint="@color/dark_blue">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_password_sign_up"
                         android:layout_width="301dp"
                         android:layout_height="match_parent"
-                        android:background="@color/light_blue"
+                        android:background="@color/light_silver"
                         android:hint="@string/password"
                         android:inputType="textPassword"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/dark_blue"
                         android:textSize="25sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:textColorHint="@color/blue"
+                    android:textColorHint="@color/dark_blue"
                     app:counterEnabled="true"
                     app:counterMaxLength="10"
                     app:startIconDrawable="@drawable/ic_phone"
-                    app:startIconTint="@color/blue">
+                    app:startIconTint="@color/dark_blue">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_Phone_sign_up"
                         android:layout_width="301dp"
                         android:layout_height="match_parent"
-                        android:background="@color/light_blue"
+                        android:background="@color/light_silver"
                         android:hint="@string/phone_number"
                         android:inputType="phone"
                         android:maxLength="10"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/dark_blue"
                         android:textSize="25sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -170,7 +174,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="3dp"
                         android:text="@string/account"
-                        android:textColor="@color/blue" />
+                        android:textColor="@color/dark_blue" />
                 </LinearLayout>
 
             </LinearLayout>

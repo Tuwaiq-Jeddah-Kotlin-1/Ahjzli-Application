@@ -73,8 +73,6 @@ class MainViewAdapter(var  storeFilterList: MutableList<GetStoreData>,
     }
     //take the size
     override fun getItemCount(): Int = storeFilterList.size
-
-
 }
 
 //init the values
@@ -101,12 +99,10 @@ class CustomHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnCli
        parcelize.maxPeople = maxP
 
         storeBLocation.setOnClickListener{
-            Toast.makeText(this.itemView.context," map is ${map}",Toast.LENGTH_LONG).show()
-            val gmmIntentUri = Uri.parse("google.navigation:q=$map")
+            val gmmIntentUri = Uri.parse("geo:$map?q=$map")
             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
             mapIntent.setPackage("com.google.android.apps.maps")
             this.itemView.context.startActivity(mapIntent)
-
         }
 
         val action: NavDirections =

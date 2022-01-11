@@ -21,7 +21,7 @@
     <string name="send">ارسال</string>
     <string name="profile">الملف الشخصي</string>
     <string name="home">الصفحة الرئيسية</string>
-    <string name="my_table">My Table</string>
+    <string name="my_table">حجوازتي</string>
     <string name="settings">الاعدادات</string>
     <string name="my_profile">ملفي الشخصي</string>
     <string name="edit">تعديل</string>
@@ -39,4 +39,7 @@
     <string name="email_text">البريد الالكتروني:</string>
     <string name="phone_number_text">رقم الهاتف:</string>
     <string name="how_many_person">ما هوا عدد الاشخاص؟</string>
+    <string name="max_capacity">المتاح :</string>
+    <string name="change_language">تغيير اللغة:</string>
+    <string name="chose_language">اختر لغة</string>
 </resources>

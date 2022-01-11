@@ -16,15 +16,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    private var backPressedTime = 0L
     lateinit var navHostFragment :NavHostFragment
     lateinit var navController :NavController
     @SuppressLint("CommitTransaction")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val mode = resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)
         val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
+        val language = sharedPreferences.getString("My_Lang", "")!!
+        setLocal(language)
+
+        val mode = resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)
         if (sharedPreferences.getBoolean("darkMode",false)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             if (mode == Configuration.UI_MODE_NIGHT_YES) {
@@ -37,8 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadView(sharedPreferences: SharedPreferences) {
         setContentView(R.layout.activity_main)
-        val language = sharedPreferences.getString("My_Lang", "")!!
-        setLocal(language)
+
         supportActionBar?.hide()
         navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
@@ -46,14 +47,6 @@ class MainActivity : AppCompatActivity() {
         bottomNavController()
     }
 
-/*    override fun onBackPressed() {
-        if (backPressedTime + 2500 > System.currentTimeMillis()){
-            super.onBackPressed()
-        }else{
-            Toast.makeText(applicationContext, "Press back again to exit app", Toast.LENGTH_SHORT).show()
-        }
-        backPressedTime = System.currentTimeMillis()
-    }*/
 
     private fun bottomNavController(){
         val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_nav_view)

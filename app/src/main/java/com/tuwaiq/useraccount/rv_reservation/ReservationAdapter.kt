@@ -1,5 +1,7 @@
 package com.tuwaiq.useraccount.rv_reservation
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +27,10 @@ class ReservationAdapter(private val reservationList: MutableList<ReservationDat
         holder.branchNameReservation.text = reserve.branchName
         holder.loc = reserve.maps
         holder.location.setOnClickListener {
-            Toast.makeText(holder.itemView.context, reserve.maps,Toast.LENGTH_SHORT).show()
+            val gmmIntentUri = Uri.parse("google.navigation:q=${reserve.maps}")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            holder.itemView.context.startActivity(mapIntent)
         }
     }
 
