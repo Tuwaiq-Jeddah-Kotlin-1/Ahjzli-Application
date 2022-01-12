@@ -13,11 +13,13 @@
         <action
             android:id="@+id/action_signIn_to_register"
             app:destination="@id/Register"
-            app:popUpTo="@id/signIn"
+            app:popUpTo="@id/Register"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_signIn_to_forgetPassword"
-            app:destination="@id/forgetPassword" />
+            app:destination="@id/forgetPassword"
+            app:popUpTo="@id/forgetPassword"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_signIn_to_mainView"
             app:destination="@id/mainView"
@@ -59,7 +61,8 @@
         <action
             android:id="@+id/action_forgetPassword_to_signIn"
             app:destination="@id/signIn"
-        />
+            app:popUpTo="@id/signIn"
+            app:popUpToInclusive="true" />
 
     </fragment>
     <fragment

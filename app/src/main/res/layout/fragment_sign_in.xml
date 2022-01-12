@@ -58,9 +58,9 @@
                     android:layout_marginTop="40dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:textColorHint="@color/main_color"
+                    android:textColorHint="@color/editText_color"
                     app:startIconDrawable="@drawable/ic_email"
-                    app:startIconTint="@color/main_color">
+                    app:startIconTint="@color/editText_color">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_email_sign_in"
@@ -69,7 +69,7 @@
                         android:background="@color/light_silver"
                         android:hint="@string/email"
                         android:inputType="textEmailAddress"
-                        android:textColor="@color/main_color"
+                        android:textColor="@color/editText_color"
                         android:textSize="25sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,10 +79,10 @@
                     android:layout_marginTop="15dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:textColorHint="@color/main_color"
+                    android:textColorHint="@color/editText_color"
                     app:passwordToggleEnabled="true"
                     app:startIconDrawable="@drawable/ic_lock"
-                    app:startIconTint="@color/main_color">
+                    app:startIconTint="@color/editText_color">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_password_sign_in"
@@ -124,6 +124,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
+                        android:textStyle="bold"
                         android:layout_marginTop="17dp"
                         android:text="@string/password_with_q_mark"
                         android:textColor="@color/main_color" />
@@ -161,6 +162,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textStyle="bold"
                         android:layout_marginStart="3dp"
                         android:text="@string/account"
                         android:textColor="@color/main_color" />

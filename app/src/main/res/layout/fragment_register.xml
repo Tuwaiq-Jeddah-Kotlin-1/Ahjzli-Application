@@ -58,9 +58,9 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="40dp"
                     android:gravity="center"
-                    android:textColorHint="@color/main_color"
+                    android:textColorHint="@color/editText_color"
                     app:startIconDrawable="@drawable/ic_person"
-                    app:startIconTint="@color/main_color">
+                    app:startIconTint="@color/editText_color">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_userName_sign_up"
@@ -69,7 +69,7 @@
                         android:background="@color/light_silver"
                         android:hint="@string/user_name"
                         android:inputType="textPersonName"
-                        android:textColor="@color/main_color"
+                        android:textColor="@color/editText_color"
                         android:textSize="25sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,9 +79,9 @@
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:textColorHint="@color/main_color"
+                    android:textColorHint="@color/editText_color"
                     app:startIconDrawable="@drawable/ic_email"
-                    app:startIconTint="@color/main_color">
+                    app:startIconTint="@color/editText_color">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_email_sign_up"
@@ -90,7 +90,7 @@
                         android:background="@color/light_silver"
                         android:hint="@string/email"
                         android:inputType="textEmailAddress"
-                        android:textColor="@color/main_color"
+                        android:textColor="@color/editText_color"
                         android:textSize="25sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,10 +100,10 @@
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:textColorHint="@color/main_color"
+                    android:textColorHint="@color/editText_color"
                     app:passwordToggleEnabled="true"
                     app:startIconDrawable="@drawable/ic_lock"
-                    app:startIconTint="@color/main_color">
+                    app:startIconTint="@color/editText_color">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_password_sign_up"
@@ -112,7 +112,7 @@
                         android:background="@color/light_silver"
                         android:hint="@string/password"
                         android:inputType="textPassword"
-                        android:textColor="@color/main_color"
+                        android:textColor="@color/editText_color"
                         android:textSize="25sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -123,11 +123,11 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:textColorHint="@color/main_color"
+                    android:textColorHint="@color/editText_color"
                     app:counterEnabled="true"
                     app:counterMaxLength="10"
                     app:startIconDrawable="@drawable/ic_phone"
-                    app:startIconTint="@color/main_color">
+                    app:startIconTint="@color/editText_color">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_Phone_sign_up"
@@ -137,7 +137,7 @@
                         android:hint="@string/phone_number"
                         android:inputType="phone"
                         android:maxLength="10"
-                        android:textColor="@color/main_color"
+                        android:textColor="@color/editText_color"
                         android:textSize="25sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -172,6 +172,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textStyle="bold"
                         android:layout_marginStart="3dp"
                         android:text="@string/account"
                         android:textColor="@color/main_color" />

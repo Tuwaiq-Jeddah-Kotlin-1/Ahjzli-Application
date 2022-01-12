@@ -27,7 +27,7 @@
         app:itemIconTint="@color/color"
         app:itemTextColor="@color/color"
         app:labelVisibilityMode="selected"
-        android:background="@color/background"
+        android:background="@color/background_bottom_bar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

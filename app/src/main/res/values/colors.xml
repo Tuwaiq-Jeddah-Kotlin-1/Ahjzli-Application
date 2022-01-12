@@ -3,7 +3,12 @@
 
     <color name="light_silver">#E2E2DE</color>
     <color name="background">#FFFFFFFF</color>
+    <color name="icon_bottom_bar_false">#000000</color>
+    <color name="icon_bottom_bar_true">#223C76</color>
+    <color name="editText_color">#223C76</color>
+    <color name="background_bottom_bar">#FFFFFFFF</color>
     <color name="main_color">#223C76</color>
+    <color name="primary">#223C76</color>
     <color name="brown">#AB7365</color>
     <color name="red">#E80000</color>
     <color name="text_main_color">#000000</color>
