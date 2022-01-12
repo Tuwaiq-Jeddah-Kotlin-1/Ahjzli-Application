@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:text="@string/ahjzli"
-        android:textColor="@color/dark_blue"
+        android:textColor="@color/main_color"
         android:textSize="80sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/settings"
-                android:textColor="@color/dark_blue"
+                android:textColor="@color/main_color"
                 android:layout_marginTop="15dp"
                 android:textSize="50sp"
                 android:textStyle="bold"
@@ -69,42 +69,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
+                        android:layout_marginStart="5dp"
                         android:text="@string/dark_mode"
-                        android:textColor="@color/dark_blue"
-                        android:textSize="20sp"
+                        android:textColor="@color/main_color"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         tools:ignore="UseSwitchCompatOrMaterialXml" />
-                   <LinearLayout
-                       android:layout_marginTop="20dp"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content">
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="@string/change_language"
-                        android:textSize="20sp"
-                        android:textColor="@color/dark_blue"/>
-
-
-                       <ImageView
-                           android:id="@+id/language"
-                           android:layout_width="40dp"
-                           android:layout_height="40dp"
-                           android:background="@drawable/ic_baseline_language_24"
-                           android:layout_marginStart="10dp"/>
-                    <!--<TextView
                         android:id="@+id/language"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="4dp"
-                        android:background="@color/light_silver"
-                        android:layout_marginStart="3dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
                         android:text="@string/language"
-                        android:textColor="@color/dark_blue"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />-->
-                   </LinearLayout>
+                        android:textColor="@color/main_color"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_baseline_language_24"
+                        app:drawableTint="@color/main_color" />
 
                     <View
                         android:id="@+id/divider"
@@ -120,7 +104,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="30dp"
                         android:text="@string/about_us"
-                        android:textColor="@color/dark_blue"
+                        android:textColor="@color/main_color"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -130,7 +114,7 @@
                         android:layout_marginHorizontal="40dp"
                         android:gravity="center"
                         android:text="@string/About"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text_main_color"
                         android:textSize="20sp" />
 
                     <TextView
@@ -140,7 +124,7 @@
                         android:layout_marginHorizontal="40dp"
                         android:layout_marginTop="35dp"
                         android:text="@string/version"
-                        android:textColor="@color/dark_blue"
+                        android:textColor="@color/main_color"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -151,7 +135,7 @@
                         android:layout_marginHorizontal="40dp"
                         android:layout_marginBottom="10dp"
                         android:text="@string/_1_0_0"
-                        android:textColor="@color/dark_blue"
+                        android:textColor="@color/main_color"
                         android:textSize="20sp" />
                 </LinearLayout>
             </ScrollView>

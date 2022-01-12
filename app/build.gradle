@@ -52,8 +52,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     //lottie
     implementation "com.airbnb.android:lottie:4.2.2"
-    //gif
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.1.17'
     //nav
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
@@ -68,6 +66,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx:24.0.0'
     //firebase auth
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
+    //Support Library
     //noinspection GradleCompatible
     implementation 'com.android.support:preference-v7:26.1.0'
     //WorkManager

@@ -21,7 +21,7 @@ import java.util.*
 
 
 class Setting : Fragment() {
-    private lateinit var languageTextView:ImageView
+    private lateinit var languageTextView:TextView
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private lateinit var switch: Switch
 

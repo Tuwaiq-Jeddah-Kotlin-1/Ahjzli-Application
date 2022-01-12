@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="@string/ahjzli"
-        android:textColor="@color/dark_blue"
+        android:textColor="@color/main_color"
         android:textSize="80sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/my_profile"
-                android:textColor="@color/dark_blue"
+                android:textColor="@color/main_color"
                 android:textSize="50sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -75,9 +75,9 @@
                             android:layout_marginStart="30dp"
                             android:layout_marginTop="15dp"
                             android:layout_marginBottom="7dp"
-                            android:background="@color/white"
+                            android:background="@color/background"
                             android:text="@string/user_name_text"
-                            android:textColor="@color/dark_blue"
+                            android:textColor="@color/main_color"
                             android:textSize="25sp"
                             android:textStyle="bold" />
 
@@ -89,9 +89,9 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="15dp"
                             android:layout_marginBottom="7dp"
-                            android:background="@color/white"
+                            android:background="@color/background"
                             android:hint="@string/user_name"
-                            android:textColor="@color/dark_blue"
+                            android:textColor="@color/main_color"
                             android:textSize="25sp" />
                     </LinearLayout>
 
@@ -107,9 +107,9 @@
                             android:layout_marginStart="30dp"
                             android:layout_marginTop="15dp"
                             android:layout_marginBottom="7dp"
-                            android:background="@color/white"
+                            android:background="@color/background"
                             android:text="@string/email_text"
-                            android:textColor="@color/dark_blue"
+                            android:textColor="@color/main_color"
                             android:textSize="25sp"
                             android:textStyle="bold" />
 
@@ -121,9 +121,9 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="15dp"
                             android:layout_marginBottom="7dp"
-                            android:background="@color/white"
+                            android:background="@color/background"
                             android:hint="@string/email"
-                            android:textColor="@color/dark_blue"
+                            android:textColor="@color/main_color"
                             android:textSize="25sp" />
                     </LinearLayout>
 
@@ -139,9 +139,9 @@
                             android:layout_marginStart="30dp"
                             android:layout_marginTop="15dp"
                             android:layout_marginBottom="7dp"
-                            android:background="@color/white"
+                            android:background="@color/background"
                             android:text="@string/phone_number_text"
-                            android:textColor="@color/dark_blue"
+                            android:textColor="@color/main_color"
                             android:textSize="25sp"
                             android:textStyle="bold" />
 
@@ -153,9 +153,9 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="15dp"
                             android:layout_marginBottom="7dp"
-                            android:background="@color/white"
+                            android:background="@color/background"
                             android:hint="@string/phone_number"
-                            android:textColor="@color/dark_blue"
+                            android:textColor="@color/main_color"
                             android:textSize="25sp" />
                     </LinearLayout>
 
@@ -167,8 +167,8 @@
                         android:layout_marginTop="80dp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/btn_shape"
-                        android:text="@string/edit"
-                        android:textColor="@color/white"
+                        android:text="@string/save"
+                        android:textColor="@color/background"
                         android:textSize="25sp"
                         android:textStyle="bold" />
 

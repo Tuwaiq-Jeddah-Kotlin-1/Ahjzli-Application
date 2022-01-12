@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="25sp"
-            android:textColor="@color/black"
+            android:textColor="@color/text_main_color"
             android:text="@string/user_name"
             android:gravity="center"/>
     <EditText
@@ -32,17 +32,17 @@
         android:layout_width="301dp"
         android:layout_margin="10dp"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/background"
         android:layout_gravity="center"
         android:hint="@string/user_name"
-        android:textColor="@color/dark_blue"
+        android:textColor="@color/main_color"
         android:textSize="25sp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="25sp"
-            android:textColor="@color/black"
+            android:textColor="@color/text_main_color"
             android:text="@string/phone_number"
             android:gravity="center"/>
     <EditText
@@ -50,10 +50,10 @@
         android:layout_width="301dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/white"
+        android:background="@color/background"
         android:hint="@string/phone_number"
         android:inputType="phone"
-        android:textColor="@color/dark_blue"
+        android:textColor="@color/main_color"
         android:layout_margin="10dp"
         android:textSize="25sp" />
 
@@ -65,7 +65,8 @@
         android:layout_marginBottom="80dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/btn_shape"
-        android:text="@string/edit"
+        android:textColor="@color/background"
+        android:text="@string/save"
         android:textSize="25sp"
         android:textStyle="bold" />
     </LinearLayout>

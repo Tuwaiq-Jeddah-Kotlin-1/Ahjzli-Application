@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bck"
+    android:background="@drawable/bk1"
     tools:context=".MainActivity">
 
     <fragment
@@ -27,7 +27,7 @@
         app:itemIconTint="@color/color"
         app:itemTextColor="@color/color"
         app:labelVisibilityMode="selected"
-        android:background="@color/white"
+        android:background="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
