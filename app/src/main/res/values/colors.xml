@@ -9,7 +9,7 @@
     <color name="background_bottom_bar">#FFFFFFFF</color>
     <color name="main_color">#223C76</color>
     <color name="primary">#223C76</color>
-    <color name="brown">#AB7365</color>
+    <color name="second_color">#AB7365</color>
     <color name="red">#E80000</color>
     <color name="text_main_color">#000000</color>
     <color name="silver">#4DFFFFFF</color>

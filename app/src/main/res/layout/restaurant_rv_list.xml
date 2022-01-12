@@ -33,7 +33,7 @@
         android:layout_marginStart="20dp"
         android:hint="@string/branch_name"
         android:textSize="20sp"
-        android:textColor="@color/brown"
+        android:textColor="@color/second_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/etLocation_reserve"
         app:layout_constraintStart_toStartOf="parent"
