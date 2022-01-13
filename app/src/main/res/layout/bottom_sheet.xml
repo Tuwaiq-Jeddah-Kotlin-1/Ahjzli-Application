@@ -68,6 +68,7 @@
         android:textColor="@color/background"
         android:text="@string/save"
         android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:backgroundTint="@color/main_color"/>
     </LinearLayout>
 </FrameLayout>

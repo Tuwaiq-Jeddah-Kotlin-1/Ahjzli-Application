@@ -68,12 +68,11 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
         maxCapacity.text = maxP.toString()
 
         //reserved the data from the rv
-        sName.setText(args.storeData.storeName)
-        bName.setText(args.storeData.branchName)
+        sName.text = args.storeData.storeName
+        bName.text = args.storeData.branchName
 
         //get the name and the phone number of the user
-        val db2 = FirebaseFirestore.getInstance()
-        db2.collection("UserAccount").document("$uId")
+        db.collection("UserAccount").document("$uId")
             .get().addOnCompleteListener {
                 if (it.result?.exists()!!) {
                     name = it.result!!.getString("userName").toString()
