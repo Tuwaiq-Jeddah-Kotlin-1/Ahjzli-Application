@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.core.app.ActivityCompat.recreate
+import androidx.navigation.fragment.findNavController
 import java.util.*
 
 
@@ -51,23 +52,21 @@ class Setting : Fragment() {
         }
 
         languageTextView.setOnClickListener {
-            showChangeLanguage()
+            showChangeLanguage(view)
         }
 
 
     }
     //show change language
     @SuppressLint("SetTextI18n")
-    private fun showChangeLanguage(){
+    private fun showChangeLanguage(view:View){
         val languageList = arrayOf("English","العربية")
         val mBuilder = AlertDialog.Builder(this.context)
         mBuilder.setTitle(getString(R.string.chose_language))
         mBuilder.setSingleChoiceItems(languageList,-1){dialog, which ->
             if (which == 0) {
-//                languageTextView.text = "English"
                 setLocate("en")
             }else if (which == 1){
-//                languageTextView.text = "العربية"
                 setLocate("ar")
             }
             recreate(context as Activity)
@@ -86,5 +85,6 @@ class Setting : Fragment() {
         val editor = this.requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
         editor.putString("My_Lang", lang)
         editor.apply()
+
     }
 }

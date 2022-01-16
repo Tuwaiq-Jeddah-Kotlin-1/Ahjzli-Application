@@ -43,4 +43,5 @@
     <string name="max_capacity">المتاح :</string>
     <string name="change_language">تغيير اللغة:</string>
     <string name="chose_language">اختر لغة</string>
+    <string name="time">الوقت</string>
 </resources>

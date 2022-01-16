@@ -58,7 +58,7 @@ class MainViewAdapter(var  storeFilterList: MutableList<GetStoreData>,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomHolder {
         // inflate layout
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.restaurant_rv_list,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.main_rv_list,parent,false)
         return CustomHolder(view)
     }
 
@@ -78,9 +78,9 @@ class MainViewAdapter(var  storeFilterList: MutableList<GetStoreData>,
 //init the values
 class CustomHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClickListener {
 
-    val sName: TextView = itemView.findViewById(R.id.txtRestaurantName_reserve)
-    val storeBName: TextView = itemView.findViewById(R.id.txtRestaurantBranch)
-    val storeBLocation: ImageView = itemView.findViewById(R.id.etLocation_reserve)
+    val sName: TextView = itemView.findViewById(R.id.txtStoreName_main)
+    val storeBName: TextView = itemView.findViewById(R.id.txtStoreBranch_main)
+    val storeBLocation: ImageView = itemView.findViewById(R.id.etLocation_main)
     lateinit var map: String
     lateinit var idOwner:String
       var maxP:Int =1

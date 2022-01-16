@@ -8,10 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.core.view.isVisible
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -34,8 +32,10 @@ class SignIn : Fragment() {
     private lateinit var enterYourPass:TextInputEditText
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var sharedPreferences2: SharedPreferences
+    private lateinit var progressBar: ProgressBar
     var checkBoxValue = false
     private lateinit var rememberMe: CheckBox
+    val db = FirebaseFirestore.getInstance().collection("UserAccount")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -51,6 +51,7 @@ class SignIn : Fragment() {
         signInButton = view.findViewById(R.id.btnSignIn)
         enterYourEmail = view.findViewById(R.id.tiet_email_sign_in)
         enterYourPass = view.findViewById(R.id.tiet_password_sign_in)
+        progressBar = view.findViewById(R.id.progressBarSingIn)
 
         //check box action
         rememberMe = view.findViewById(R.id.checkBox)
@@ -70,6 +71,8 @@ class SignIn : Fragment() {
             view.findNavController().navigate(action)
         }
         signInButton.setOnClickListener {
+            signInButton.isClickable = false
+            progressBar.isVisible = true
             signIn()
         }
     }
@@ -88,33 +91,35 @@ class SignIn : Fragment() {
                         // if the registration is not successful then show error massage
                         Toast.makeText(context, "Please make sure the values are correct, or fill the fields",
                             Toast.LENGTH_LONG).show()
+                        signInButton.isClickable =true
+                        progressBar.isVisible = false
                     }
                 }
         }else{
-            Toast.makeText(context, "please enter all fields", Toast.LENGTH_LONG)
+            Toast.makeText(context, "please fill fields", Toast.LENGTH_LONG)
                 .show()
+            signInButton.isClickable =true
+            progressBar.isVisible = false
         }
     }
 
     //check in the fireStore
     private fun checkInTheFireStore(){
         val uId =FirebaseAuth.getInstance().currentUser?.uid
-        val db = FirebaseFirestore.getInstance()
-        db.collection("UserAccount").document("$uId")
+        db.document("$uId")
             .get().addOnCompleteListener {
                 if (it.result?.exists()!!){
-                    Toast.makeText(context, "Sign in successful", Toast.LENGTH_LONG)
-                        .show()
                     getUserInfo()
                     findNavController().navigate(SignInDirections.actionSignInToMainView())
                     checkBox()
                 }else{
-                    Toast.makeText(context, "Please make sure the values are correct", Toast.LENGTH_LONG)
+                    Toast.makeText(context, "Please make sure the email or the password are correct", Toast.LENGTH_LONG)
                         .show()
+                    signInButton.isClickable = true
+                    progressBar.isVisible = false
                 }
             }
     }
-
 
     //save check box
     private fun checkBox(){
@@ -131,8 +136,7 @@ class SignIn : Fragment() {
     fun getUserInfo() = CoroutineScope(Dispatchers.IO).launch {
         val uId =FirebaseAuth.getInstance().currentUser?.uid
         try {
-            val db = FirebaseFirestore.getInstance()
-            db.collection("UserAccount").document("$uId")
+            db.document("$uId")
                 .get().addOnCompleteListener {
                     if (it.result?.exists()!!) {
                         val name = it.result!!.getString("userName")
@@ -140,23 +144,15 @@ class SignIn : Fragment() {
                         val userPhone = it.result!!.getString("number")
 
                         //to save the info in the sp
-
                         val editor3:SharedPreferences.Editor = sharedPreferences2.edit()
                         editor3.putString("spUserName",name.toString())
                         editor3.putString("spEmail",userEmail.toString())
                         editor3.putString("spPhoneNumber",userPhone.toString())
                         editor3.apply()
-
-                    } else {
-                        Log.e("error \n", "errooooooorr")
                     }
                 }
-
         } catch (e: Exception) {
-            withContext(Dispatchers.Main) {
-                // Toast.makeText(coroutineContext,0,0, e.message, Toast.LENGTH_LONG).show()
                 Log.e("FUNCTION createUserFirestore", "${e.message}")
-            }
         }
     }
 

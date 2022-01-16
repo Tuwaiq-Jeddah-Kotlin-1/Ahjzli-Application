@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -20,24 +22,22 @@ class MainActivity : AppCompatActivity() {
     lateinit var navController :NavController
     @SuppressLint("CommitTransaction")
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
-        val language = sharedPreferences.getString("My_Lang", "")!!
-        setLocal(language)
 
-        val mode = resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)
-        if (sharedPreferences.getBoolean("darkMode",false)) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            if (mode == Configuration.UI_MODE_NIGHT_YES) {
-                loadView(sharedPreferences)
+            val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
+            val language = sharedPreferences.getString("My_Lang", "")!!
+            setLocal(language)
+
+            if (sharedPreferences.getBoolean("darkMode",true)) {
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+            }else{
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
             }
-        }else{
-            loadView(sharedPreferences)
+        super.onCreate(savedInstanceState)
+            loadView()
         }
-    }
 
-    private fun loadView(sharedPreferences: SharedPreferences) {
+    private fun loadView() {
         setContentView(R.layout.activity_main)
 
         supportActionBar?.hide()

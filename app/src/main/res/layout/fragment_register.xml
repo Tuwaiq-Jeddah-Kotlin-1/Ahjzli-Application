@@ -126,6 +126,7 @@
                     android:textColorHint="@color/editText_color"
                     app:counterEnabled="true"
                     app:counterMaxLength="10"
+                    app:counterTextColor="@color/main_color"
                     app:startIconDrawable="@drawable/ic_phone"
                     app:startIconTint="@color/editText_color">
 

@@ -42,5 +42,6 @@
     <string name="max_capacity">ِAvailable :</string>
     <string name="change_language">Change language:</string>
     <string name="chose_language">Chose Language</string>
+    <string name="time">time</string>
 
 </resources>
