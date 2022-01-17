@@ -9,13 +9,12 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.navigation.NavDeepLinkBuilder
-import com.tuwaiq.useraccount.MainActivity
+import com.tuwaiq.useraccount.ui.MainActivity
 import com.tuwaiq.useraccount.R
 
 class NotificationHelper(val context: Context) {
-    private val CHANNEL_ID = "movie_channel_id"
-    private val NOTIFICATION_ID = 1
+    private val channelId = "ahjzli_channel_id"
+    private val notificationId = 1
 
     @RequiresApi(Build.VERSION_CODES.S)
     fun createNotification(title: String, message: String){
@@ -26,8 +25,7 @@ class NotificationHelper(val context: Context) {
         }
 
         val pendingIntent = PendingIntent.getActivity(context,0,intent, PendingIntent.FLAG_MUTABLE)
-
-        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+        val notification = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(R.drawable.ic_notificatios)
             .setContentTitle(title)
             .setContentText(message)
@@ -35,16 +33,16 @@ class NotificationHelper(val context: Context) {
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
             .build()
-        NotificationManagerCompat.from(context).notify(NOTIFICATION_ID,notification)
+        NotificationManagerCompat.from(context).notify(notificationId,notification)
 
     }
 
     private fun createNotificationChannel(){
 
             val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID,
-                CHANNEL_ID, importance).apply {
-                description = "Anime Channel description"
+            val channel = NotificationChannel(channelId,
+                channelId, importance).apply {
+                description = "ahjzli Channel description"
             }
             val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)

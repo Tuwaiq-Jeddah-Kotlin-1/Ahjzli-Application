@@ -3,12 +3,10 @@ package com.tuwaiq.useraccount.rv_reservation
 import android.annotation.SuppressLint
 import android.graphics.Canvas
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,8 +25,7 @@ class Reservation : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_reservation, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_reservation, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,14 +36,13 @@ class Reservation : Fragment() {
         reservationAdapter = ReservationAdapter(rList)
         reservationRV.adapter = reservationAdapter
 
+        getTheReservationList()
+
         val taskTouchHelper= ItemTouchHelper(simpleCallback)
         taskTouchHelper.attachToRecyclerView(reservationRV)
-
-        getTheReservationList()
-        deleteReservation()
     }
 
-    private var simpleCallback= object : ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT.or(ItemTouchHelper.RIGHT)){
+    private var simpleCallback = object : ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT.or(ItemTouchHelper.RIGHT)){
         override fun onMove(
             recyclerView: RecyclerView,
             viewHolder: RecyclerView.ViewHolder,
@@ -62,16 +58,14 @@ class Reservation : Fragment() {
                 ItemTouchHelper.LEFT -> {
                     db.collection("Reservation").document(delete.idRq).delete()
                     rList.remove(delete)
-
-                    ReservationAdapter(rList).notifyItemRemoved(position)
-                    Toast.makeText(context, " ${  delete.numberOfTheCustomer}", Toast.LENGTH_SHORT).show()
+                    ReservationAdapter(rList)
+                        .notifyItemRemoved(position)
                     addNumberTheOwner(delete.ownerId,delete.numberOfTheCustomer)
                 }
                 ItemTouchHelper.RIGHT -> {
                     db.collection("Reservation").document(delete.idRq).delete()
                     rList.remove(delete)
 
-                    Toast.makeText(context, " ${  delete.numberOfTheCustomer}", Toast.LENGTH_SHORT).show()
                     ReservationAdapter(rList).notifyItemRemoved(position)
                     addNumberTheOwner(delete.ownerId,delete.numberOfTheCustomer)
                 }
@@ -100,52 +94,23 @@ class Reservation : Fragment() {
             }
     }
 
-    private fun deleteReservation(){
-        db = FirebaseFirestore.getInstance()
-        val id =FirebaseAuth.getInstance().currentUser?.uid
-        db.collection("Reservation").whereEqualTo("userId",id)
-            .addSnapshotListener(object : EventListener<QuerySnapshot> {
-
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                if (error != null) {
-                    Log.e("Firestore Add", error.message.toString())
-                    return
-                }
-                for (dc: DocumentChange in value?.documentChanges!!) {
-                    if (dc.type == DocumentChange.Type.REMOVED) {
-
-                        rList.remove(dc.document.toObject(ReservationData::class.java))
-                        Log.d("delete",rList.toString())
-                    }
-                }
-                reservationAdapter.notifyDataSetChanged()
-            }
-        })
-    }
-
+    @SuppressLint("NotifyDataSetChanged")
     private fun getTheReservationList() {
         db = FirebaseFirestore.getInstance()
         val id =FirebaseAuth.getInstance().currentUser?.uid
         db.collection("Reservation").whereEqualTo("userId", id.toString())
-            .addSnapshotListener(object : EventListener<QuerySnapshot> {
+            .addSnapshotListener { value, _ ->
+                for (dc: DocumentChange in value?.documentChanges!!) {
+                    if (dc.type == DocumentChange.Type.ADDED) {
 
-                @SuppressLint("NotifyDataSetChanged")
-                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                    if (error != null) {
-                        Log.e("Firestore Add", error.message.toString())
-                        return
+                        rList.add(dc.document.toObject(ReservationData::class.java))
+                    } else {
+                        rList.remove(dc.document.toObject(ReservationData::class.java))
                     }
-                    for (dc: DocumentChange in value?.documentChanges!!) {
-                        if (dc.type == DocumentChange.Type.ADDED) {
-
-                            rList.add(dc.document.toObject(ReservationData::class.java))
-                        }
-                    }
-                    reservationAdapter.notifyDataSetChanged()
                 }
-            })
-        }
+                reservationAdapter.notifyDataSetChanged()
+            }
+    }
 
 
 }

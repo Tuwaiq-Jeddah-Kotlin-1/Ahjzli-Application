@@ -3,15 +3,12 @@ package com.tuwaiq.useraccount.registration
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.isVisible
-import androidx.navigation.NavDirections
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -20,7 +17,6 @@ import com.tuwaiq.useraccount.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class SignIn : Fragment() {
@@ -33,15 +29,14 @@ class SignIn : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var sharedPreferences2: SharedPreferences
     private lateinit var progressBar: ProgressBar
-    var checkBoxValue = false
+    private var checkBoxValue = false
     private lateinit var rememberMe: CheckBox
-    val db = FirebaseFirestore.getInstance().collection("UserAccount")
+    private val db = FirebaseFirestore.getInstance().collection("UserAccount")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_sign_in, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_sign_in, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,22 +48,22 @@ class SignIn : Fragment() {
         enterYourPass = view.findViewById(R.id.tiet_password_sign_in)
         progressBar = view.findViewById(R.id.progressBarSingIn)
 
-        //check box action
+
         rememberMe = view.findViewById(R.id.checkBox)
         sharedPreferences = this.requireActivity().getSharedPreferences("preference", Context.MODE_PRIVATE)
         sharedPreferences2 = this.requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE)
+
+        //check box action
         checkBoxValue = sharedPreferences.getBoolean("CHECKBOX", false)
         if (checkBoxValue) {
-            findNavController().navigate(R.id.action_signIn_to_mainView)
+            findNavController().navigate(R.id.mainView)
         }
 
         dontHaveAccount.setOnClickListener {
-            val action: NavDirections = SignInDirections.actionSignInToRegister()
-            view.findNavController().navigate(action)
+            findNavController().navigate(R.id.Register)
         }
         forgetPasswordText.setOnClickListener {
-            val action: NavDirections = SignInDirections.actionSignInToForgetPassword()
-            view.findNavController().navigate(action)
+            findNavController().navigate(R.id.forgetPassword)
         }
         signInButton.setOnClickListener {
             signInButton.isClickable = false
@@ -78,8 +73,8 @@ class SignIn : Fragment() {
     }
 
     private fun signIn() {
-        val email: String = enterYourEmail.text.toString().trim { it <= ' ' }
-        val password =enterYourPass.text.toString().trim { it <= ' ' }
+        val email: String = enterYourEmail.text.toString().trim()
+        val password =enterYourPass.text.toString().trim()
         if(email.isNotEmpty() && password.isNotEmpty()) {
 
             //get the email and pass from the Authentication
@@ -104,13 +99,13 @@ class SignIn : Fragment() {
     }
 
     //check in the fireStore
-    private fun checkInTheFireStore(){
+    private fun checkInTheFireStore()= CoroutineScope(Dispatchers.IO).launch{
         val uId =FirebaseAuth.getInstance().currentUser?.uid
         db.document("$uId")
             .get().addOnCompleteListener {
                 if (it.result?.exists()!!){
                     getUserInfo()
-                    findNavController().navigate(SignInDirections.actionSignInToMainView())
+                    findNavController().navigate(R.id.mainView)
                     checkBox()
                 }else{
                     Toast.makeText(context, "Please make sure the email or the password are correct", Toast.LENGTH_LONG)
@@ -123,19 +118,15 @@ class SignIn : Fragment() {
 
     //save check box
     private fun checkBox(){
-        val emailPreference: String = enterYourEmail.text.toString()
-        val passwordPreference: String = enterYourPass.text.toString()
         val checked: Boolean = rememberMe.isChecked
-        val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        editor.putString("EMAIL", emailPreference)
-        editor.putString("PASSWORD", passwordPreference)
-        editor.putBoolean("CHECKBOX", checked)
-        editor.apply()
+        sharedPreferences.edit()
+        .putBoolean("CHECKBOX", checked)
+        .apply()
     }
 
-    fun getUserInfo() = CoroutineScope(Dispatchers.IO).launch {
+    //save user info to save it in sp
+    private fun getUserInfo() = CoroutineScope(Dispatchers.IO).launch {
         val uId =FirebaseAuth.getInstance().currentUser?.uid
-        try {
             db.document("$uId")
                 .get().addOnCompleteListener {
                     if (it.result?.exists()!!) {
@@ -144,18 +135,14 @@ class SignIn : Fragment() {
                         val userPhone = it.result!!.getString("number")
 
                         //to save the info in the sp
-                        val editor3:SharedPreferences.Editor = sharedPreferences2.edit()
-                        editor3.putString("spUserName",name.toString())
-                        editor3.putString("spEmail",userEmail.toString())
-                        editor3.putString("spPhoneNumber",userPhone.toString())
-                        editor3.apply()
+                        sharedPreferences2.edit()
+                        .putString("spUserName",name.toString())
+                        .putString("spEmail",userEmail.toString())
+                        .putString("spPhoneNumber",userPhone.toString())
+                        .apply()
                     }
                 }
-        } catch (e: Exception) {
-                Log.e("FUNCTION createUserFirestore", "${e.message}")
-        }
     }
-
 }
 
 

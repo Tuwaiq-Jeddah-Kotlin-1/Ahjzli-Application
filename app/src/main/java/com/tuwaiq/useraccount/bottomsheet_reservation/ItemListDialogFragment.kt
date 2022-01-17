@@ -1,6 +1,5 @@
 package com.tuwaiq.useraccount.bottomsheet_reservation
 
-import android.graphics.Color
 import android.os.Bundle
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import android.view.LayoutInflater
@@ -13,44 +12,35 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.WorkRequest
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.tuwaiq.useraccount.MainActivity
 import com.tuwaiq.useraccount.R
-import com.tuwaiq.useraccount.notification.AhjzliNotificationRepo
 import com.tuwaiq.useraccount.rv_reservation.ReservationData
-import com.tuwaiq.useraccount.notification.AhjzliWorker
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class ItemListDialogFragment : BottomSheetDialogFragment() {
     private val args by navArgs<ItemListDialogFragmentArgs>()
 
-    val uId = FirebaseAuth.getInstance().currentUser?.uid
+    private val uId = FirebaseAuth.getInstance().currentUser?.uid
+    private var db = FirebaseFirestore.getInstance()
     private lateinit var sName: TextView
     private lateinit var bName: TextView
     private lateinit var numberOfPeople: EditText
     private lateinit var maxCapacity:TextView
     private lateinit var reservationButton: Button
-    private var db = FirebaseFirestore.getInstance()
     private lateinit var name: String
     private lateinit var phone: String
     private var enterNumber:Int = 1
-    private  var maxP:Int=0
-
+    private var maxP:Int=0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =
-            inflater.inflate(R.layout.fragment_item_list_dialog_list_dialog, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_item_list_dialog_list_dialog, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,6 +69,7 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
                     phone = it.result!!.getString("number").toString()
                 }
             }
+
         numberOfPeople.addTextChangedListener { capacity ->
             if (capacity.toString().isNotBlank() && capacity.toString().toIntOrNull() == null){
                 numberOfPeople.setText(capacity?.substring(0,capacity.length -1))
@@ -86,6 +77,10 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
             if (capacity.toString().toIntOrNull() != null) {
                 if (capacity.toString().toInt() > maxP) {
                     numberOfPeople.setText(maxP.toString())
+                    Toast.makeText(
+                        context, "You can't reserve more than: $maxP",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }else if (capacity.toString().toInt() < 1){
                     numberOfPeople.setText("1")
                 }
@@ -97,29 +92,17 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
 
             if (numberOfPeople.text.isNotEmpty()) {
                 enterNumber = numberOfPeople.text.toString().toInt()
-                if (enterNumber > 0 && numberOfPeople.text.isNotEmpty()) {
+                if (maxP == 0){
+                    Toast.makeText(
+                        context, "there is no more space",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }else {
                     if (enterNumber <= maxP) {
                         maxP -= enterNumber
                         addReserve()
                         upDateTheNumberOfPeople()
-                    } else {
-                        if (maxP == 0) {
-                            Toast.makeText(
-                                context, "There is no more space!!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            Toast.makeText(
-                                context, "You can't reserve more than: $maxP",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
                     }
-                } else {
-                    Toast.makeText(
-                        context, "please enter number bigger then 0 ",
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
             }else{
                 Toast.makeText(
@@ -154,7 +137,7 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
         reserve.userPhone = phone
         reserve.date = formatted
         db.collection("Reservation").document(reserve.idRq).set(reserve)
-        findNavController().navigate(ItemListDialogFragmentDirections.actionItemListDialogFragmentToReservation())
+        findNavController().navigate(R.id.reservation)
 
 
     }

@@ -1,9 +1,9 @@
 package com.tuwaiq.useraccount.rv_main_view
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,28 +16,24 @@ import com.tuwaiq.useraccount.R
 import java.util.*
 import kotlin.collections.ArrayList
 
-private const val TAG = "MainViewAdapter"
 class MainViewAdapter(var  storeFilterList: MutableList<GetStoreData>,
                     ): RecyclerView.Adapter<CustomHolder>(),Filterable {
     var storeList = mutableListOf<GetStoreData>()
 
     init {
-        Log.d(TAG, "$storeFilterList: ")
         storeFilterList.forEach {
             storeList.add(it)
-            Log.d(TAG, "$it: ")
         }
     }
 
     override fun getFilter(): Filter = object : Filter(){
-        override fun performFiltering(constraint: CharSequence?): FilterResults? {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
             val filteredList: MutableList<GetStoreData> = ArrayList()
 
             if (constraint == null || constraint.isEmpty()) {
                 filteredList.addAll(storeList)
-                Log.d(TAG, "performFiltering: $storeList")
             } else {
-                val filterPattern = constraint.toString().lowercase(Locale.getDefault()).trim { it <= ' ' }
+                val filterPattern = constraint.toString().lowercase(Locale.getDefault()).trim()
                 for (item in storeList) {
                     if (item.storeName.lowercase(Locale.getDefault()).contains(filterPattern)) {
                         filteredList.add(item)
@@ -49,6 +45,7 @@ class MainViewAdapter(var  storeFilterList: MutableList<GetStoreData>,
             return results
         }
 
+        @SuppressLint("NotifyDataSetChanged")
         override fun publishResults(constraint: CharSequence?, results: FilterResults) {
             storeFilterList.clear()
             storeFilterList.addAll(results.values as List<GetStoreData>)
@@ -80,11 +77,10 @@ class CustomHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnCli
 
     val sName: TextView = itemView.findViewById(R.id.txtStoreName_main)
     val storeBName: TextView = itemView.findViewById(R.id.txtStoreBranch_main)
-    val storeBLocation: ImageView = itemView.findViewById(R.id.etLocation_main)
+    private val storeBLocation: ImageView = itemView.findViewById(R.id.etLocation_main)
     lateinit var map: String
     lateinit var idOwner:String
       var maxP:Int =1
-
 
     init {
         itemView.setOnClickListener (this)
@@ -104,7 +100,6 @@ class CustomHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnCli
             mapIntent.setPackage("com.google.android.apps.maps")
             this.itemView.context.startActivity(mapIntent)
         }
-
         val action: NavDirections =
                 MainInterfaceDirections.actionMainViewToItemListDialogFragment(parcelize)
            findNavController(itemView.findFragment()).navigate(action)

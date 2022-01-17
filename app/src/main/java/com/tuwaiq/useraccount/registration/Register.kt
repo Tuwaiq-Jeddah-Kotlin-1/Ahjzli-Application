@@ -11,8 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.navigation.NavDirections
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,7 +22,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 
 
 class Register : Fragment() {
@@ -33,25 +31,23 @@ class Register : Fragment() {
     private lateinit var passwordAccount: TextInputEditText
     private lateinit var phoneNumberAccount: TextInputEditText
     private lateinit var signUpButton: Button
-    private lateinit var sharedPreferences2: SharedPreferences
+    private lateinit var sharedPreferences: SharedPreferences
     private val db = Firebase.firestore.collection("UserAccount")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_register, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_register, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        sharedPreferences2 = this.requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE)
+        sharedPreferences = this.requireActivity().getSharedPreferences("Profile", Context.MODE_PRIVATE)
 
         //back to sign in
         haveAccount = view.findViewById(R.id.txt_have_account)
         haveAccount.setOnClickListener {
-            val action: NavDirections = RegisterDirections.actionRegisterToSignIn()
-            view.findNavController().navigate(action)
+            findNavController().navigate(R.id.signIn)
         }
 
         userNameAccount = view.findViewById(R.id.tiet_userName_sign_up)
@@ -64,32 +60,22 @@ class Register : Fragment() {
         signUpButton.setOnClickListener {
             registerUser()
         }
-
-
     }
 
     // registerUser()
     private fun registerUser() {
         val userName = userNameAccount.text.toString()
-        val email: String = emailAccount.text.toString().trim { it <= ' ' }
-        val password = passwordAccount.text.toString().trim { it <= ' ' }
-        //Phone number must be 10
+        val email: String = emailAccount.text.toString().trim()
+        val password = passwordAccount.text.toString().trim()
         val phoneNumber = phoneNumberAccount.text.toString()
         val account = MyAccountData(userName, email, phoneNumber)
-
         if (userName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && phoneNumber.isNotEmpty()) {
-            if (phoneNumber.toInt() == 10) {
+            //phone number must be 10
+            if (phoneNumber.length == 10) {
                 //save to the Authentication
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(
-                                context,
-                                "You were registered successful",
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
-
                             saveAccount(account)
                         } else {
                             // if the registration is not successful then show error massage
@@ -98,7 +84,6 @@ class Register : Fragment() {
                                 "Please make sure the values are correct, or fill the fields",
                                 Toast.LENGTH_LONG
                             ).show()
-
                         }
                     }
             }else{
@@ -111,29 +96,17 @@ class Register : Fragment() {
         }
     }
 
-
     //push to fire store
     private fun saveAccount(account: MyAccountData) = CoroutineScope(Dispatchers.IO).launch {
         val uid = FirebaseAuth.getInstance().currentUser?.uid
-        try {
             db.document("$uid").set(account)
             withContext(Dispatchers.Main) {
                 getUserInfo()
-                val action: NavDirections = RegisterDirections.actionRegisterToMainView()
-                view?.findNavController()?.navigate(action)
-                //saveSharedPreference()
-                Toast.makeText(context, "saved data", Toast.LENGTH_LONG).show()
+                findNavController().navigate(R.id.mainView)
             }
-
-        } catch (e: Exception) {
-            withContext(Dispatchers.Main) {
-                Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
-            }
-        }
     }
-    fun getUserInfo() = CoroutineScope(Dispatchers.IO).launch {
+    private fun getUserInfo() = CoroutineScope(Dispatchers.IO).launch {
         val uId =FirebaseAuth.getInstance().currentUser?.uid
-        try {
             val db = FirebaseFirestore.getInstance()
             db.collection("UserAccount").document("$uId")
                 .get().addOnCompleteListener {
@@ -143,23 +116,14 @@ class Register : Fragment() {
                         val userPhone = it.result!!.getString("number")
 
                         //to save the info in the sp
-
-                        val editor3:SharedPreferences.Editor = sharedPreferences2.edit()
-                        editor3.putString("spUserName",name.toString())
-                        editor3.putString("spEmail",userEmail.toString())
-                        editor3.putString("spPhoneNumber",userPhone.toString())
-                        editor3.apply()
-
+                        sharedPreferences.edit()
+                        .putString("spUserName",name.toString())
+                        .putString("spEmail",userEmail.toString())
+                        .putString("spPhoneNumber",userPhone.toString())
+                        .apply()
                     } else {
-                        Log.e("error \n", "errooooooorr")
+                        Log.e("error", "failed to upload user info")
                     }
                 }
-
-        } catch (e: Exception) {
-            withContext(Dispatchers.Main) {
-                // Toast.makeText(coroutineContext,0,0, e.message, Toast.LENGTH_LONG).show()
-                Log.e("FUNCTION createUserFirestore", "${e.message}")
-            }
-        }
     }
 }

@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
-import androidx.navigation.NavDirections
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.tuwaiq.useraccount.R
@@ -19,15 +18,12 @@ class ForgetPassword : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_forget_password, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_forget_password, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         sendPassButton = view.findViewById(R.id.btnSendThePass)
         enterToSendTheEmail = view.findViewById(R.id.tiet_email_forgotPass)
-
 
         sendPassButton.setOnClickListener {
             sendTheEmail()
@@ -35,7 +31,7 @@ class ForgetPassword : Fragment() {
     }
 
     private fun sendTheEmail() {
-        val email = enterToSendTheEmail.text.toString().trim { it <= ' ' }
+        val email = enterToSendTheEmail.text.toString().trim()
 
         if (email.isEmpty()) {
             Toast.makeText(context, "Please enter your E-mail", Toast.LENGTH_SHORT).show()
@@ -47,8 +43,7 @@ class ForgetPassword : Fragment() {
                             context, "E-mail send successful to reset your password",
                             Toast.LENGTH_LONG
                         ).show()
-                        view?.findNavController()
-                            ?.navigate(ForgetPasswordDirections.actionForgetPasswordToSignIn())
+                        findNavController().navigate(R.id.signIn)
                     } else {
                         Toast.makeText(
                             context, "The email wasn't correct",
