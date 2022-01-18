@@ -29,7 +29,7 @@ class Splash : Fragment() {
         lottie.startAnimation(AnimationUtils.loadAnimation(context, R.anim.logo_img))
         logoTextView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.text_logo))
         Handler().postDelayed({
-            findNavController().navigate(R.id.signIn)
+            findNavController().navigate(SplashDirections.actionSplashToSignIn())
         }, 5000)
     }
 }

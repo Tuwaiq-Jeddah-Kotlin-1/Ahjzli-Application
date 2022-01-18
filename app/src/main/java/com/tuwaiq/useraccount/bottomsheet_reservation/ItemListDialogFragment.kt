@@ -137,7 +137,7 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
         reserve.userPhone = phone
         reserve.date = formatted
         db.collection("Reservation").document(reserve.idRq).set(reserve)
-        findNavController().navigate(R.id.reservation)
+        findNavController().navigate(ItemListDialogFragmentDirections.actionItemListDialogFragmentToReservation())
 
 
     }

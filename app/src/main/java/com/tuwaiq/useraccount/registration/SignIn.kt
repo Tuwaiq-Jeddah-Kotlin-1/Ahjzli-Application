@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 
 class SignIn : Fragment() {
 
-    private lateinit var dontHaveAccount:TextView
+    private lateinit var doNotHaveAccount:TextView
     private lateinit var forgetPasswordText:TextView
     private lateinit var signInButton:Button
     private lateinit var enterYourEmail:TextInputEditText
@@ -41,7 +41,7 @@ class SignIn : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        dontHaveAccount =view.findViewById(R.id.txt_dont_have_account)
+        doNotHaveAccount =view.findViewById(R.id.txt_dont_have_account)
         forgetPasswordText = view.findViewById(R.id.txt_forget_password)
         signInButton = view.findViewById(R.id.btnSignIn)
         enterYourEmail = view.findViewById(R.id.tiet_email_sign_in)
@@ -56,14 +56,14 @@ class SignIn : Fragment() {
         //check box action
         checkBoxValue = sharedPreferences.getBoolean("CHECKBOX", false)
         if (checkBoxValue) {
-            findNavController().navigate(R.id.mainView)
+            findNavController().navigate(SignInDirections.actionSignInToMainView())
         }
 
-        dontHaveAccount.setOnClickListener {
-            findNavController().navigate(R.id.Register)
+        doNotHaveAccount.setOnClickListener {
+            findNavController().navigate(SignInDirections.actionSignInToRegister())
         }
         forgetPasswordText.setOnClickListener {
-            findNavController().navigate(R.id.forgetPassword)
+            findNavController().navigate(SignInDirections.actionSignInToForgetPassword())
         }
         signInButton.setOnClickListener {
             signInButton.isClickable = false
@@ -105,7 +105,7 @@ class SignIn : Fragment() {
             .get().addOnCompleteListener {
                 if (it.result?.exists()!!){
                     getUserInfo()
-                    findNavController().navigate(R.id.mainView)
+                    findNavController().navigate(SignInDirections.actionSignInToMainView())
                     checkBox()
                 }else{
                     Toast.makeText(context, "Please make sure the email or the password are correct", Toast.LENGTH_LONG)

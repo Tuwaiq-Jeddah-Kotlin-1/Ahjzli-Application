@@ -36,11 +36,6 @@
             app:destination="@id/signIn"
             app:popUpTo="@id/Splash"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_Splash_to_setting"
-            app:destination="@id/setting"
-            app:popUpTo="@id/Splash"
-            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/Register"

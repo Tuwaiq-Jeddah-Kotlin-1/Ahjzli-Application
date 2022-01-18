@@ -80,7 +80,7 @@ class Profile : Fragment() {
         sharedPreferences2.edit()
         .clear()
         .apply()
-        findNavController().navigate(R.id.signIn)
+        findNavController().navigate(ProfileDirections.actionProfileToSignIn())
     }
 
 
