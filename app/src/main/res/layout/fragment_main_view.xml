@@ -4,48 +4,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background_img"
-    tools:context=".MainView">
+    tools:context=".rv_main_view.MainInterface">
 
     <FrameLayout
         android:id="@+id/frameLayoutInMainView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineInMainView"
+        android:background="@color/main_color"
+        app:layout_constraintBottom_toTopOf="@+id/storeRV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/gif_logo_main"
-            android:layout_width="100dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="20dp"
-            android:src="@drawable/my_logo" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ahjzli"
-            android:textColor="@color/green"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:layout_gravity="center|top"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="15dp"/>
 
-        <SearchView
-            android:id="@+id/searchView"
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/search_view_background"
-            android:iconifiedByDefault="false"
-            android:queryHint="restaurants..."
-            android:textColor="@color/black" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieAnimationView"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="93dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/splash" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="20dp"
+                android:text="@string/ahjzli"
+                android:textColor="@color/background"
+                android:textSize="50sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/lottieAnimationView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_marginTop="3dp"
+                app:theme="@style/SearchViewStyle"
+                android:background="@drawable/search_view_background"
+                android:iconifiedByDefault="false"
+                android:queryBackground="@android:color/transparent"
+                android:queryHint="@string/search"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -56,7 +72,7 @@
         app:layout_constraintGuide_percent="0.20"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/restaurantsRV"
+        android:id="@+id/storeRV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -3,17 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_img"
+    android:background="@color/main_color"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Register">
+    tools:context=".registration.Register">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/ahjzli"
-        android:textColor="@color/white"
+        android:textColor="@color/background"
         android:textSize="80sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,145 +23,174 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="13dp"
         android:background="@drawable/frame"
-        android:layout_marginTop="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center|top"
-            android:layout_marginTop="50dp"
-            android:orientation="vertical">
+            tools:ignore="ExtraText">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/sign_up"
-                android:textColor="@color/green"
-                android:textSize="50sp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="10dp"
-                app:startIconTint="@color/green"
-                android:textColorHint="@color/green"
-                app:startIconDrawable="@drawable/ic_person">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tiet_userName_sign_up"
-                    android:layout_width="301dp"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:hint="@string/user_name"
-                    android:inputType="textPersonName"
-                    android:textSize="25sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:textColorHint="@color/green"
-                app:startIconDrawable="@drawable/ic_email"
-                app:startIconTint="@color/green">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tiet_email_sign_up"
-                    android:layout_width="301dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/white"
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/green"
-                    android:textSize="25sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:textColorHint="@color/green"
-                app:passwordToggleEnabled="true"
-                app:startIconDrawable="@drawable/ic_lock"
-                app:startIconTint="@color/green">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tiet_password_sign_up"
-                    android:layout_width="301dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/white"
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:textColor="@color/green"
-                    android:textSize="25sp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:textColorHint="@color/green"
-                app:startIconDrawable="@drawable/ic_phone"
-                app:startIconTint="@color/green">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tiet_Phone_sign_up"
-                    android:layout_width="301dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/white"
-                    android:hint="@string/phone_number"
-                    android:inputType="phone"
-                    android:textColor="@color/green"
-                    android:textSize="25sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:backgroundTint="@color/green"
-                android:text="@string/sign_up"
-                android:textSize="25sp"
-                android:textStyle="bold" />
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="75dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center">
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/do_you_have_an"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:id="@+id/txt_have_account"
+                    android:layout_gravity="center"
+                    android:text="@string/sign_up"
+                    android:textColor="@color/main_color"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/green"
-                    android:layout_marginStart="3dp"
-                    android:text="@string/account"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
+                    android:gravity="center"
+                    android:textColorHint="@color/editText_color"
+                    app:startIconDrawable="@drawable/ic_person"
+                    app:startIconTint="@color/editText_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_userName_sign_up"
+                        android:layout_width="301dp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/light_silver"
+                        android:hint="@string/user_name"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/editText_color"
+                        android:textSize="25sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColorHint="@color/editText_color"
+                    app:startIconDrawable="@drawable/ic_email"
+                    app:startIconTint="@color/editText_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_email_sign_up"
+                        android:layout_width="301dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/light_silver"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/editText_color"
+                        android:textSize="25sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColorHint="@color/editText_color"
+                    app:passwordToggleEnabled="true"
+                    app:startIconDrawable="@drawable/ic_lock"
+                    app:startIconTint="@color/editText_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_password_sign_up"
+                        android:layout_width="301dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/light_silver"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:textColor="@color/editText_color"
+                        android:textSize="25sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:textColorHint="@color/editText_color"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="10"
+                    app:counterTextColor="@color/main_color"
+                    app:startIconDrawable="@drawable/ic_phone"
+                    app:startIconTint="@color/editText_color">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_Phone_sign_up"
+                        android:layout_width="301dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/light_silver"
+                        android:hint="@string/phone_number"
+                        android:inputType="phone"
+                        android:maxLength="10"
+                        android:textColor="@color/editText_color"
+                        android:textSize="25sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btnSignUp"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/btn_shape"
+                    android:textColor="@color/background"
+                    android:text="@string/sign_up"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@null"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="75dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/do_you_have_an"
+                        android:textColor="@color/text_main_color" />
+
+                    <TextView
+                        android:id="@+id/txt_have_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:layout_marginStart="3dp"
+                        android:text="@string/account"
+                        android:textColor="@color/main_color" />
+                </LinearLayout>
+                <ProgressBar
+                    android:id="@+id/progressBarRegister"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginBottom="70dp"/>
+
             </LinearLayout>
-
-        </LinearLayout>
-
-
+        </ScrollView>
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

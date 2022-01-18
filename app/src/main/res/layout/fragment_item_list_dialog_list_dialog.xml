@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_height="match_parent"
+    tools:context=".bottomsheet_reservation.ItemListDialogFragment">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center"
+        android:src="@drawable/ic_maximize"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginVertical="10dp"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/store_name"
+            android:textColor="@color/text_main_color"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txt_storeName_reservation"
+            android:layout_width="301dp"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:layout_gravity="center"
+            android:textColorHint="@color/main_color"
+            android:hint="@string/store_name"
+            android:textColor="@color/main_color"
+            android:textSize="25sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/branch_name"
+            android:textColor="@color/text_main_color"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/txt_branchName_reservation"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/background"
+            android:layout_gravity="center"
+            android:textColorHint="@color/main_color"
+            android:hint="@string/branch_name"
+            android:textColor="@color/main_color"
+            android:textSize="25sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/how_many_person"
+            android:textColor="@color/text_main_color"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/txtNumberOfPeople"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/background"
+            android:inputType="number"
+            android:gravity="center"
+            android:text="1"
+            android:backgroundTint="@color/light_silver"
+            android:textColor="@color/editText_color"
+            android:layout_margin="10dp"
+            android:textSize="25sp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_main_color"
+            android:textSize="15sp"
+            android:text="@string/max_capacity"/>
+        <TextView
+            android:id="@+id/max_capacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_main_color"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="0"/>
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btnReservation"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            app:backgroundTint="@null"
+            android:background="@drawable/btn_shape"
+            android:backgroundTint="@color/main_color"
+            android:backgroundTintMode="src_in"
+            android:text="@string/reserve"
+            android:textColor="@color/background"
+            android:textSize="25sp"
+            android:textStyle="bold"  />
+    </LinearLayout>
+</FrameLayout>
+
+
+
+
