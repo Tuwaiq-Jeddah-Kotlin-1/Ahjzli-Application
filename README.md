@@ -96,7 +96,8 @@ Here you can chose the theme(dark or light theme) and the language(English or Ar
 8.	Google map API
 
 ## :camera_flash: Screenshots
-<img src="https://user-images.githubusercontent.com/91476854/150305797-de846522-a0ae-495b-baf2-9dbf09d83eaf.jpg" width="180"><img src="https://user-images.githubusercontent.com/91476854/150305642-c41267b1-32fc-447c-a9e7-c38548dc0a2b.jpg" width="180"><img src="https://user-images.githubusercontent.com/91476854/150305881-349d6cbd-c7ce-436b-917a-c1a068d6d907.jpg" width="180">
-<img src="https://user-images.githubusercontent.com/91476854/150306023-7382cc76-f7f3-41c6-8607-0fd550566e7d.jpg" width="180"><img src="https://user-images.githubusercontent.com/91476854/150306163-cb37351a-502e-436f-b009-2e80b31e9008.jpg" width="180"><img src="https://user-images.githubusercontent.com/91476854/150306254-9777a607-8efe-4c20-b23d-42c532203514.jpg" width="180"><img src="https://user-images.githubusercontent.com/91476854/150306372-a7df2afe-8bef-4756-b18a-97d66517cebf.jpg" width="180">
+<img src="https://user-images.githubusercontent.com/91476854/150305797-de846522-a0ae-495b-baf2-9dbf09d83eaf.jpg" width="180"> <img src="https://user-images.githubusercontent.com/91476854/150305642-c41267b1-32fc-447c-a9e7-c38548dc0a2b.jpg" width="180"> <img src="https://user-images.githubusercontent.com/91476854/150305881-349d6cbd-c7ce-436b-917a-c1a068d6d907.jpg" width="180">
+----------------------------------------------------------
+<img src="https://user-images.githubusercontent.com/91476854/150306023-7382cc76-f7f3-41c6-8607-0fd550566e7d.jpg" width="180"> <img src="https://user-images.githubusercontent.com/91476854/150306163-cb37351a-502e-436f-b009-2e80b31e9008.jpg" width="180"> <img src="https://user-images.githubusercontent.com/91476854/150306254-9777a607-8efe-4c20-b23d-42c532203514.jpg" width="180"> <img src="https://user-images.githubusercontent.com/91476854/150306372-a7df2afe-8bef-4756-b18a-97d66517cebf.jpg" width="180">
 
 
