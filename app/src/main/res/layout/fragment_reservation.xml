@@ -9,9 +9,8 @@
     <FrameLayout
         android:id="@+id/frameLayoutInReservation"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/main_color"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineInReservation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,10 +23,14 @@
                 android:id="@+id/lottieAnimationView"
                 android:layout_width="100dp"
                 android:layout_height="80dp"
-                android:layout_marginStart="93dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="3dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.331"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/splash" />
@@ -36,22 +39,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|top"
-                android:layout_marginTop="20dp"
                 android:text="@string/ahjzli"
                 android:textColor="@color/background"
                 android:textSize="50sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/lottieAnimationView"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineInReservation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reservationRV"
         android:layout_width="match_parent"

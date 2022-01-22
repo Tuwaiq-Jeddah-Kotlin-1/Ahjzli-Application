@@ -9,9 +9,8 @@
     <FrameLayout
         android:id="@+id/frameLayoutInMainView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/main_color"
-        app:layout_constraintBottom_toTopOf="@+id/storeRV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -51,25 +50,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|bottom"
                 android:layout_marginTop="3dp"
-                app:theme="@style/SearchViewStyle"
+                android:layout_marginBottom="3dp"
                 android:background="@drawable/search_view_background"
                 android:iconifiedByDefault="false"
                 android:queryBackground="@android:color/transparent"
                 android:queryHint="@string/search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.491"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView" />
+                app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView"
+                app:theme="@style/SearchViewStyle" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineInMainView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.20"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/storeRV"
@@ -78,6 +70,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineInMainView" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayoutInMainView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
