@@ -156,10 +156,6 @@ libraries:
 user account ->
 email: s@gmail.com
 pass: 123456
------------------------
-owner account ->
-email: su@gmail.com
-pass: 123456
 
 ## :camera_flash: Screenshots
 <img src="https://user-images.githubusercontent.com/91476854/150305797-de846522-a0ae-495b-baf2-9dbf09d83eaf.jpg" width="180"> <img src="https://user-images.githubusercontent.com/91476854/150305642-c41267b1-32fc-447c-a9e7-c38548dc0a2b.jpg" width="180"> <img src="https://user-images.githubusercontent.com/91476854/150305881-349d6cbd-c7ce-436b-917a-c1a068d6d907.jpg" width="180">
