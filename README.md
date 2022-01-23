@@ -1,12 +1,5 @@
 # Ahjzli-Application
----------------------
-user account ->
-email: s@gmail.com
-pass: 123456
------------------------
-owner account ->
-email: su@gmail.com
-pass: 123456
+<img src="https://user-images.githubusercontent.com/91476854/150669781-0493e8a9-9038-43ca-a74f-bfb73df35f1e.gif" width="180">
 ------------------------------
 ------------------------------
 ## :scroll:Introduction
@@ -94,6 +87,16 @@ Here you can chose the theme(dark or light theme) and the language(English or Ar
 6.	Swipe Color
 7.	Unit Test
 8.	Google map API
+
+7-Demo
+---------------------
+user account ->
+email: s@gmail.com
+pass: 123456
+-----------------------
+owner account ->
+email: su@gmail.com
+pass: 123456
 
 ## :camera_flash: Screenshots
 <img src="https://user-images.githubusercontent.com/91476854/150305797-de846522-a0ae-495b-baf2-9dbf09d83eaf.jpg" width="180"> <img src="https://user-images.githubusercontent.com/91476854/150305642-c41267b1-32fc-447c-a9e7-c38548dc0a2b.jpg" width="180"> <img src="https://user-images.githubusercontent.com/91476854/150305881-349d6cbd-c7ce-436b-917a-c1a068d6d907.jpg" width="180">
